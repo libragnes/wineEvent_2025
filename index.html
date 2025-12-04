@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>釀出新未來</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* --- 您的指定配色 --- */
+            --primary-color: #7F181B;
+            /* 酒紅：主按鈕、重點文字 */
+            --accent-color: #D5BC8A;
+            /* 香檳金：背景動畫、Icon裝飾、次要按鈕 */
+            --bg-color: #ECECEC;
+            /* 霧白：整體網頁背景 */
+            --card-bg: #FFFFFF;
+            /* 純白：卡片背景 */
+            --text-main: #131313;
+            /* 尊爵黑：主要標題 */
+            --text-sub: #555555;
+            /* 深灰：內文 */
+
+            /* --- 設計變數 --- */
+            --radius-btn: 50px;
+            /* 膠囊按鈕 */
+            --radius-card: 20px;
+            /* 卡片圓角 */
+            --shadow-card: 0 10px 30px rgba(19, 19, 19, 0.05);
+            /* 極淡的黑色陰影 */
+            --nav-height: 80px;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            padding-bottom: calc(var(--nav-height) + 30px);
+            line-height: 1.6;
+        }
+
+        /* --- 容器與通用樣式 --- */
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px 24px;
+            min-height: 100vh;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            margin: 0;
+            color: var(--text-main);
+        }
+
+        /* 大標題使用襯線體 (Serif) 更有酒莊質感 */
+        h1,
+        h2 {
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        /* --- 首頁 Hero Section (含動畫) --- */
+        .hero-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 85vh;
+            /* 讓畫面垂直置中 */
+            text-align: center;
+            position: relative;
+        }
+
+        /* 圖片容器 */
+        .hero-image-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        /* 有機流動圓形動畫 (Blob) */
+        .blob-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--accent-color);
+            /* 香檳金 */
+            border-radius: 70%;
+            opacity: 0.4;
+            /* 調整透明度，不要搶過圖片 */
+            z-index: -1;
+            animation: morph 8s ease-in-out infinite;
+            filter: blur(1px);
+            /* 稍微柔化邊緣 */
+        }
+
+        /* CSS 變形動畫關鍵影格 */
+        @keyframes morph {
+            0% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+
+            50% {
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            }
+
+            100% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+        }
+
+        .hero-img {
+            width: 90%;
+            height: auto;
+            object-fit: contain;
+            /* 輕微浮動效果 */
+            /*animation: float 4s ease-in-out infinite;*/
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+
+        .sub-title {
+            font-size: 1rem;
+            color: var(--text-sub);
+            letter-spacing: 1px;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .sub-title::after {
+            content: '';
+            display: block;
+            width: 30px;
+            height: 3px;
+            background: var(--accent-color);
+            /* 香檳金裝飾線 */
+            margin: 10px auto 0;
+        }
+
+        /* --- 按鈕樣式 --- */
+        .btn {
+            background-color: var(--primary-color);
+            /* 酒紅 */
+            color: #FFFFFF;
+            border: none;
+            width: 100%;
+            padding: 18px 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: var(--radius-btn);
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(127, 24, 27, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: transform 0.2s, background-color 0.2s;
+            margin-bottom: 16px;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+            background-color: #5a0e10;
+            /* 按下變深 */
+        }
+
+        /* 次要按鈕樣式 (Outline Style) */
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: none;
+        }
+
+        /* --- 卡片與內容樣式 --- */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius-card);
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-card);
+        }
+
+        /* 頁面切換 */
+        .page-section {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- 底部導航 Dock (深色版) --- */
+        .nav-dock {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #131313;
+            /* 尊爵黑背景 */
+            padding: 10px 25px;
+            border-radius: 50px;
+            display: flex;
+            gap: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            color: #666;
+            /* 未選中顏色 */
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn.active {
+            color: var(--accent-color);
+            /* 選中變成香檳金 */
+            transform: translateY(-3px);
+        }
+
+        /* --- 聞香頁面 (Chips) --- */
+        /* --- Here !! 優化版聞香頁面樣式 --- */
+        #aroma .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* 讓所有內容居中 */
+        }
+
+        .aroma-grid {
+            display: grid;
+            gap: 15px;
+            width: 100%;
+            /* 寬度佔滿容器 */
+            max-width: 100%;
+            /* 確保不超過手機寬度 */
+        }
+
+        .bottle-row {
+            display: flex;
+            flex-direction: column;
+            /* 改為垂直排列：上面是題號，下面是選項 */
+            align-items: center;
+            background: #fff;
+            /* 改為純白底，更乾淨 */
+            padding: 15px;
+            border-radius: 10px;
+            /* 讓圓角跟按鈕一樣圓 */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .bottle-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            width: 100%;
+            justify-content: left;
+            /* 標題居中 */
+            position: relative;
+        }
+
+        .bottle-num {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            font-style: italic;
+            margin-right: 10px;
+        }
+
+        /* 選項容器：關鍵修改 */
+        .chips-container {
+            display: flex;
+            flex-wrap: wrap;
+            /* 允許換行 */
+            justify-content: center;
+            /* 選項居中 */
+            gap: 8px;
+            /* 選項間距 */
+            width: 100%;
+        }
+
+        .chip {
+            padding: 8px 12px;
+            /* 縮小一點 padding */
+            background: #F3F3F3;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            /* 字體稍微縮小以適應手機 */
+            color: #666;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+            cursor: pointer;
+            flex: 1 1 auto;
+            /* 讓選項自動分配寬度，但不小於內容 */
+            text-align: center;
+            min-width: 60px;
+            /* 最小寬度防止太擠 */
+            max-width: 100px;
+            /* 限制最大寬度，保持整齊 */
+        }
+
+        .chip.selected {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 10px rgba(127, 24, 27, 0.2);
+        }
+
+        /* --- 結果彈窗樣式 (新增動畫與狀態) --- */
+        .modal-icon-wrapper {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: bounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            60% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* 失敗時的搖晃動畫 */
+        .modal-icon-wrapper.shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-10px);
+            }
+
+            75% {
+                transform: translateX(10px);
+            }
+        }
+
+        /* --- 知識頁面 --- */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .info-table th {
+            color: var(--accent-color);
+            font-weight: normal;
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-table td {
+            font-weight: 500;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .map-box {
+            background: #E8F1F5;
+            /* 稍微帶藍的灰，模擬水色 */
+            height: 220px;
+            border-radius: var(--radius-card);
+            position: relative;
+            overflow: hidden;
+            margin: 20px 0;
+            border: 2px solid #fff;
+        }
+
+        .map-river {
+            position: absolute;
+            left: 50%;
+            height: 100%;
+            width: 15px;
+            background: #fff;
+            /* 用白色負空間代表河流 */
+            transform: skewX(-10deg) translateX(-50%);
+            opacity: 0.8;
+        }
+
+        .map-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 30px;
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+        }
+
+        .map-left {
+            left: 15%;
+        }
+
+        .map-right {
+            right: 15%;
+        }
+
+        /* --- 品酒頁面 (翻牌) --- */
+        .tasting-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding: 0 10px;
+        }
+
+        .step-item {
+            text-align: center;
+            color: var(--text-sub);
+        }
+
+        .step-icon {
+            width: 55px;
+            height: 55px;
+            background: var(--card-bg);
+            border: 1px solid #eee;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            /* 香檳金 Icon */
+            margin: 0 auto 8px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .flip-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .flip-card {
+            perspective: 1000px;
+            height: 380px;
+            cursor: pointer;
+        }
+
+        .flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-card);
+        }
+
+        .flip-card.flipped .flip-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-front,
+        .flip-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: var(--radius-card);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            background: var(--card-bg);
+        }
+
+        .flip-front {
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-color);
+            /* 酒紅背景 */
+            color: white;
+        }
+
+        .flip-front h1 {
+            color: var(--accent-color);
+            font-size: 3rem;
+            margin: 0;
+            color: var(--accent-color);
+            /* 香檳金數字 */
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        .flip-back {
+            transform: rotateY(180deg);
+            align-items: flex-start;
+            justify-content: center;
+            border: 1px solid var(--accent-color);
+            /* 金邊 */
+        }
+
+        .flavor-tag {
+            display: inline-block;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+            margin: 3px 0;
+        }
+
+        /* from here 酒瓶圖片 */
+
+
+
+        .wine-card-img {
+            /* 1. 設定一個固定的矩形空間給圖片 */
+            height: 160px;
+            /* 固定高度，確保每張卡片圖片區塊一樣高 */
+            width: 100%;
+            /* 寬度佔滿容器 */
+
+            /* 2. 讓圖片保持比例縮放，完整顯示在框框內 (不裁切、不變形) */
+            object-fit: contain;
+
+            /* 3. 設定圖片對齊位置：靠下置中 (讓酒瓶看起來站在同一水平線上) */
+            object-position: center bottom;
+
+            margin-bottom: 15px;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.1));
+        }
+
+        /* 酒名與資訊 */
+        .wine-title {
+            color: #7F181B;
+            /* 深酒紅標題 */
+            font-family: 'Noto Serif TC', serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 5px 0;
+            line-height: 1.2;
+        }
+
+        .wine-sub {
+            color: #888;
+            /* 灰色副標 */
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        /* 風味列表 (靠左對齊) */
+        .wine-flavors {
+            width: 100%;
+            text-align: left;
+            /* 讓風味文字靠左，比較整齊 */
+            font-size: 0.85rem;
+            color: #444;
+            padding-left: 5px;
+        }
+
+        .flavor-row {
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+        }
+
+        .flavor-row i {
+            margin-right: 8px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* to here */
+
+        /* 彈窗 */
+        .modal-wrap {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(19, 19, 19, 0.8);
+            /* 黑色半透明背景 */
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-box {
+            background: var(--card-bg);
+            width: 85%;
+            max-width: 320px;
+            padding: 30px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            border-top: 5px solid var(--accent-color);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="home" class="container page-section active">
+        <div class="hero-layout">
+
+            <div class="hero-image-container">
+                <div class="blob-bg"></div>
+
+                <img src="hero-image.png" alt="Hero" class="hero-img"
+                    onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081840.png'">
+            </div>
+
+            <h1 class="main-title">釀出新未來</h1>
+            <div class="sub-title">青年百億海外圓夢基金計畫</div>
+
+
+
+            <div style="width: 100%; max-width: 320px;">
+                <button class="btn" onclick="goToPage('aroma')">
+                    <i class="fas fa-wind"></i> 開始聞香挑戰
+                </button>
+                <button class="btn btn-secondary" onclick="goToPage('knowledge')">
+                    <i class="fas fa-book"></i> 葡萄酒知識區
+                </button>
+                <button class="btn btn-secondary" onclick="goToPage('tasting')">
+                    <i class="fas fa-wine-glass"></i> 品酒體驗
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div id="aroma" class="container page-section">
+        <h2 style="margin-bottom: 10px;">聞香挑戰</h2>
+        <p style="color: var(--text-sub);">滑動選項，辨識 5 種迷人香氣。</p>
+
+        <div id="quiz-list" class="aroma-grid">
+        </div>
+
+        <button class="btn" style="margin-top: 30px;" onclick="checkAroma()">
+            提交答案
+        </button>
+    </div>
+
+    <div id="knowledge" class="container page-section">
+        <h2 style="margin-bottom: 20px;">波爾多知識包</h2>
+
+        <div class="card">
+            <h3>1. 認識波爾多 (Bordeaux)</h3>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="bordeaux-location.png" alt="波爾多位置圖" style="width: 80%; max-width: 250px; border-radius: 10px;"
+                    onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Bordeaux_in_France.svg/300px-Bordeaux_in_France.svg.png'">
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: left;">
+                <div style="background: #F9F9F9; padding: 15px; border-radius: 15px;">
+                    <i class="fas fa-cloud-sun-rain"
+                        style="color: var(--accent-color); font-size: 1.5rem; margin-bottom: 5px;"></i>
+                    <h4 style="margin: 5px 0; font-size: 0.95rem;">氣候特徵</h4>
+                    <p style="font-size: 0.85rem; margin: 0;">溫帶海洋性氣候<br>溫暖潮濕</p>
+                </div>
+                <div style="background: #F9F9F9; padding: 15px; border-radius: 15px;">
+                    <i class="fas fa-grapes"
+                        style="color: var(--accent-color); font-size: 1.5rem; margin-bottom: 5px;"></i>
+                    <h4 style="margin: 5px 0; font-size: 0.95rem;">主要品種</h4>
+                    <p style="font-size: 0.85rem; margin: 0;">Cabernet Sauvignon<br>Merlot<br>Sauvignon Blanc</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px; border-top: 1px dashed #ddd; padding-top: 15px;">
+                <h4 style="color: var(--primary-color);">🍷 經典風味</h4>
+                <p style="font-size: 0.9rem; margin-bottom: 10px;">厚實、架構強的大酒體</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    <span class="chip">🍒 黑加侖/黑櫻桃</span>
+                    <span class="chip">🧱 單寧高</span>
+                    <span class="chip">🪵 橡木/香草/皮革</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>2. 混釀的藝術</h3>
+            <p style="font-size: 0.9rem; color: #666;">為什麼不只用一種葡萄？</p>
+
+            <ul style="list-style: none; padding: 0; margin-bottom: 20px;">
+                <li style="margin-bottom: 10px; display: flex; align-items: start;">
+                    <i class="fas fa-check-circle"
+                        style="color: var(--accent-color); margin-top: 4px; margin-right: 10px;"></i>
+                    <span><b>分散風險：</b>氣候潮濕不穩，單一品種容易失敗。</span>
+                </li>
+                <li style="display: flex; align-items: start;">
+                    <i class="fas fa-check-circle"
+                        style="color: var(--accent-color); margin-top: 4px; margin-right: 10px;"></i>
+                    <span><b>互補平衡：</b>運用不同葡萄個性，維持品質穩定。</span>
+                </li>
+            </ul>
+
+            <h4 style="margin-bottom: 10px; border-left: 4px solid var(--primary-color); padding-left: 10px;">🍇 葡萄的角色
+            </h4>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div
+                    style="background: #FFFBF0; padding: 12px; border-radius: 10px; display: flex; align-items: center;">
+                    <div style="font-weight: bold; color: var(--primary-color); width: 80px;">Cabernet</div>
+                    <div style="font-size: 0.9rem; margin-left: 10px;">🦴 骨架、結構、香氣深度</div>
+                </div>
+                <div
+                    style="background: #FFFBF0; padding: 12px; border-radius: 10px; display: flex; align-items: center;">
+                    <div style="font-weight: bold; color: var(--primary-color); width: 80px;">Merlot</div>
+                    <div style="font-size: 0.9rem; margin-left: 10px;">🧸 柔順、圓潤、甜美</div>
+                </div>
+                <div
+                    style="background: #FFFBF0; padding: 12px; border-radius: 10px; display: flex; align-items: center;">
+                    <div style="font-weight: bold; color: var(--primary-color); width: 80px;">Cab Franc</div>
+                    <div style="font-size: 0.9rem; margin-left: 10px;">🌸 細緻香氣、優雅</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 15px; background: #eee; padding: 10px; border-radius: 8px; font-size: 0.85rem;">
+                💡 <b>混釀 vs 單一：</b>混釀追求平衡穩定；單一追求純粹個性。
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>3. 波爾多左右岸</h3>
+            <p style="font-size: 0.9rem;">以吉倫特河 (Gironde) 為界，地理位置如下：</p>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="leftRightBank.png" alt="波爾多左右岸地圖"
+                    style="width: 100%; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            </div>
+
+            <h4 style="margin-top: 20px; margin-bottom: 10px;">⚔️ 左右岸大對決</h4>
+            <table class="info-table" style="font-size: 0.85rem;">
+                <tr style="background: #f4f4f4;">
+                    <th style="width: 20%;">比較</th>
+                    <th style="width: 40%; color: var(--primary-color);">左岸</th>
+                    <th style="width: 40%; color: var(--primary-color);">右岸</th>
+                </tr>
+                <tr>
+                    <td><b>品種</b></td>
+                    <td>Cabernet Sauvignon</td>
+                    <td>Merlot</td>
+                </tr>
+                <tr>
+                    <td><b>口感</b></td>
+                    <td>緊實、高單寧<br>高酸度</td>
+                    <td>圓滑、柔順<br>果味明顯</td>
+                </tr>
+                <tr>
+                    <td><b>類型</b></td>
+                    <td>需陳年才好喝</td>
+                    <td>年輕也好入口</td>
+                </tr>
+                <tr>
+                    <td><b>搭餐</b></td>
+                    <td>牛排、燒烤<br>(重口味)</td>
+                    <td>單喝、輕食<br>起司</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <div id="tasting" class="container page-section">
+        <h2 style="margin-bottom: 20px;">品酒方式</h2>
+
+        <div class="tasting-guide">
+
+            <div class="guide-item" onclick="toggleGuide(this)">
+                <div class="guide-header">
+                    <div class="guide-icon"><i class="fas fa-eye"></i></div>
+                    <div class="guide-title">1. 看 (Look)</div>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <div class="guide-content">
+                    <p>觀察酒液的狀態：</p>
+                    <ul>
+                        <li><b>顏色濃淡：</b>深邃或是透亮？</li>
+                        <li><b>酒淚 (Legs)：</b>掛杯流下的速度（暗示酒精或糖分）。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-item" onclick="toggleGuide(this)">
+                <div class="guide-header">
+                    <div class="guide-icon"><i class="fas fa-wind"></i></div>
+                    <div class="guide-title">2. 聞 (Smell)</div>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <div class="guide-content">
+                    <p>深吸香氣，感受強度與層次：</p>
+                    <div class="scent-box">
+                        <div class="scent-row">
+                            <span class="scent-tag primary">初級 (葡萄)</span>
+                            <span>紅/黑水果、花香、草本</span>
+                        </div>
+                        <div class="scent-row">
+                            <span class="scent-tag secondary">次級 (釀造)</span>
+                            <span>酵母、奶油、烤麵包</span>
+                        </div>
+                        <div class="scent-row">
+                            <span class="scent-tag tertiary">三級 (陳年)</span>
+                            <span>皮革、煙草、堅果、蜂蜜</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="guide-item" onclick="toggleGuide(this)">
+                <div class="guide-header">
+                    <div class="guide-icon"><i class="fas fa-wine-glass-alt"></i></div>
+                    <div class="guide-title">3. 嚐 (Taste)</div>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <div class="guide-content">
+                    <ul class="detail-list">
+                        <li>
+                            <b>酸度：</b>
+                            <span>口腔兩側是否流口水？</span>
+                        </li>
+                        <li>
+                            <b>甜度：</b>
+                            <span>舌尖感受。乾型 / 微甜 / 明顯甜？</span>
+                        </li>
+                        <li>
+                            <b>單寧 (澀感)：</b>
+                            <span>牙齦乾澀收斂感。<br>
+
+                        </li>
+                        <li>
+                            <b>酒體 (Body)：</b>
+                            <span>口感重量。輕盈 / 適中 / 濃厚？</span>
+                        </li>
+                        <li>
+                            <b>餘韻：</b>
+                            <span>吞下後味道停留時間。短 / 中 / 長？</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-item" onclick="toggleGuide(this)">
+                <div class="guide-header">
+                    <div class="guide-icon"><i class="fas fa-clipboard-check"></i></div>
+                    <div class="guide-title">4. 判斷 (Conclusion)</div>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <div class="guide-content">
+                    <p>綜合以上感受，給予評價：</p>
+                    <ul>
+                        <li><b>平衡度：</b>酸、甜、單寧、酒精是否和諧？</li>
+                        <li><b>複雜度：</b>香氣與風味是否多變？</li>
+                        <li><b>整體品質：</b>您是否會推薦這款酒？</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <style>
+            /* 手風琴容器 */
+            .tasting-guide {
+                margin-bottom: 40px;
+            }
+
+            .guide-item {
+                background: var(--card-bg);
+                border-radius: 15px;
+                margin-bottom: 12px;
+                overflow: hidden;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+                transition: all 0.3s;
+                border: 1px solid transparent;
+            }
+
+            /* 選中狀態 */
+            .guide-item.active {
+                border-color: var(--accent-color);
+                /* 香檳金邊框 */
+                box-shadow: 0 8px 20px rgba(213, 188, 138, 0.2);
+            }
+
+            /* 標題列 */
+            .guide-header {
+                display: flex;
+                align-items: center;
+                padding: 15px 20px;
+                cursor: pointer;
+                background: #fff;
+            }
+
+            .guide-icon {
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                background: var(--primary-color);
+                color: var(--accent-color);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 15px;
+                font-size: 0.9rem;
+            }
+
+            .guide-title {
+                flex-grow: 1;
+                font-weight: 700;
+                font-size: 1.05rem;
+                color: var(--text-main);
+            }
+
+            .guide-header .arrow {
+                color: #ccc;
+                transition: transform 0.3s;
+            }
+
+            .guide-item.active .arrow {
+                transform: rotate(180deg);
+                color: var(--primary-color);
+            }
+
+            /* 內容區塊 (預設隱藏) */
+            .guide-content {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease-out;
+                background: #FAFAFA;
+                padding: 0 20px;
+                /* 上下 padding 用動畫控制 */
+            }
+
+            .guide-item.active .guide-content {
+                padding-bottom: 20px;
+                /* 展開時給予底部空間 */
+                /* max-height 由 JS 動態計算或設一個夠大的值 */
+            }
+
+            /* 內容樣式微調 */
+            .guide-content ul {
+                padding-left: 20px;
+                margin: 10px 0;
+                font-size: 0.9rem;
+                color: #555;
+            }
+
+            .guide-content li {
+                margin-bottom: 6px;
+            }
+
+            /* 香氣分類標籤 */
+            .scent-box {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                margin-top: 10px;
+            }
+
+            .scent-row {
+                display: flex;
+                align-items: baseline;
+                font-size: 0.85rem;
+                color: #555;
+            }
+
+            .scent-tag {
+                font-size: 0.75rem;
+                padding: 2px 8px;
+                border-radius: 4px;
+                color: white;
+                margin-right: 8px;
+                flex-shrink: 0;
+                width: 85px;
+                text-align: center;
+            }
+
+            .primary {
+                background: #E57373;
+            }
+
+            /* 紅色系 */
+            .secondary {
+                background: #FFB74D;
+            }
+
+            /* 黃色系 */
+            .tertiary {
+                background: #8D6E63;
+            }
+
+            /* 褐色系 */
+
+            /* 嚐味列表 */
+            .detail-list {
+                list-style: none;
+                padding: 0 !important;
+            }
+
+            .detail-list li {
+                padding: 8px 0;
+                border-bottom: 1px dashed #eee;
+            }
+
+            .detail-list li:last-child {
+                border-bottom: none;
+            }
+
+            .detail-list b {
+                color: var(--primary-color);
+                margin-right: 5px;
+            }
+        </style>
+
+        <h2 style="margin-bottom: 20px;">品酒體驗卡</h2>
+
+        <script>
+            function toggleGuide(element) {
+                // 1. 切換 active class
+                element.classList.toggle('active');
+
+                // 2. 處理高度動畫
+                var content = element.querySelector('.guide-content');
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+
+
+                document.querySelectorAll('.guide-item').forEach(item => {
+                    if (item !== element) {
+                        item.classList.remove('active');
+                        item.querySelector('.guide-content').style.maxHeight = null;
+                    }
+                });
+
+            }
+        </script>
+        <div class="flip-grid">
+
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-inner">
+                    <div class="flip-front">
+                        <h1>1</h1>
+                        <small style="opacity:0.8; margin-top:10px;">點擊翻開答案</small>
+                    </div>
+                    <div class="flip-back">
+                        <img src="donatien.png" class="wine-card-img"
+                            onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081840.png'">
+
+                        <div class="wine-title">Le Master Melon</div>
+                        <div class="wine-sub">Loire / Melon de Bourgogne</div>
+
+                        <div class="wine-flavors">
+                            <div class="flavor-row">🍑 杏桃、🍋 檸檬皮</div>
+                            <div class="flavor-row">🌸 花香、🍈 香瓜</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-inner">
+                    <div class="flip-front">
+                        <h1>2</h1>
+                        <small style="opacity:0.8; margin-top:10px;">點擊翻開答案</small>
+                    </div>
+                    <div class="flip-back">
+                        <img src="lafont.jpg" class="wine-card-img"
+                            onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081840.png'">
+
+                        <div class="wine-title">Ch. Lafont Menaut</div>
+                        <div class="wine-sub">Bordeaux / Sauv. Blanc</div>
+
+                        <div class="wine-flavors">
+                            <div class="flavor-row">🍊 葡萄柚、🍊 柑橘</div>
+                            <div class="flavor-row">🍑 桃子、🍈 蜜瓜</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-inner">
+                    <div class="flip-front">
+                        <h1>3</h1>
+                        <small style="opacity:0.8; margin-top:10px;">點擊翻開答案</small>
+                    </div>
+                    <div class="flip-back">
+                        <img src="donatien_n7.png" class="wine-card-img"
+                            onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081840.png'">
+
+                        <div class="wine-title">Sancerre Rouge</div>
+                        <div class="wine-sub">Loire / Pinot Noir</div>
+
+                        <div class="wine-flavors">
+                            <div class="flavor-row">🍒 櫻桃、🍇 覆盆莓</div>
+                            <div class="flavor-row">🍓 草莓果醬</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-inner">
+                    <div class="flip-front">
+                        <h1>4</h1>
+                        <small style="opacity:0.8; margin-top:10px;">點擊翻開答案</small>
+                    </div>
+                    <div class="flip-back">
+                        <img src="siurac.png" class="wine-card-img"
+                            onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081840.png'">
+
+                        <div class="wine-title">Ch. Siurac</div>
+                        <div class="wine-sub">Bordeaux Right Bank</div>
+
+                        <div class="wine-flavors">
+                            <div class="flavor-row">🫐 黑李、🍒 黑櫻桃</div>
+                            <div class="flavor-row">✏️ 石墨、☕ 咖啡</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- from here 
+        <div class="flip-grid">
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-inner">
+                    <div class="flip-front">
+                        <h1>1</h1>
+                        <small style="color:rgba(255,255,255,0.7)">點擊翻轉</small>
+                    </div>
+                    <div class="flip-back">
+                        <h4 style="color:var(--primary-color)">Sancerre Rouge</h4>
+                        <small style="color:#999; margin-bottom:10px;">Loire / Pinot Noir</small>
+                        <span class="flavor-tag">🍒 櫻桃、🍓 草莓</span>
+                        <span class="flavor-tag">🍬 甘草、🌶️ 胡椒</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-inner">
+                    <div class="flip-front">
+                        <h1>2</h1>
+                        <small style="color:rgba(255,255,255,0.7)">點擊翻轉</small>
+                    </div>
+                    <div class="flip-back">
+                        <h4 style="color:var(--primary-color)">Ch. Siaurac</h4>
+                        <small style="color:#999; margin-bottom:10px;">Right Bank</small>
+                        <span class="flavor-tag">🍄 松露、✏️ 石墨</span>
+                        <span class="flavor-tag">☕ 咖啡、🌿 青草</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-inner">
+                    <div class="flip-front">
+                        <h1>3</h1>
+                        <small style="color:rgba(255,255,255,0.7)">點擊翻轉</small>
+                    </div>
+                    <div class="flip-back">
+                        <h4 style="color:var(--primary-color)">Le Master Melon</h4>
+                        <small style="color:#999; margin-bottom:10px;">Loire / Melon</small>
+                        <span class="flavor-tag">🍑 杏李、🍋 檸檬</span>
+                        <span class="flavor-tag">🌸 花香、🍈 香瓜</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-inner">
+                    <div class="flip-front">
+                        <h1>4</h1>
+                        <small style="color:rgba(255,255,255,0.7)">點擊翻轉</small>
+                    </div>
+                    <div class="flip-back">
+                        <h4 style="color:var(--primary-color)">Rimapere S.B.</h4>
+                        <small style="color:#999; margin-bottom:10px;">NZ / Sauv. Blanc</small>
+                        <span class="flavor-tag">🍏 芭樂、💛 百香果</span>
+                        <span class="flavor-tag">🌿 草本、🪨 礦物</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+    </div>
+
+
+    <div class="nav-dock">
+        <button class="nav-btn active" onclick="goToPage('home')" id="nav-home"><i class="fas fa-home"></i></button>
+        <button class="nav-btn" onclick="goToPage('aroma')" id="nav-aroma"><i class="fas fa-wind"></i></button>
+        <button class="nav-btn" onclick="goToPage('knowledge')" id="nav-knowledge"><i class="fas fa-book"></i></button>
+        <button class="nav-btn" onclick="goToPage('tasting')" id="nav-tasting"><i
+                class="fas fa-wine-glass"></i></button>
+    </div>
+
+
+    <div id="result-modal" class="modal-wrap">
+
+        <div class="modal-box">
+            <div id="modal-icon-box" class="modal-icon-wrapper">
+                <i id="modal-icon" class="fas"></i>
+            </div>
+
+            <h3 id="modal-title">挑戰完成</h3>
+            <p id="score-display" style="color:var(--text-sub); font-size:1.2rem; margin: 5px 0;"></p>
+
+            <div id="ans-display"
+                style="text-align: left; background: #f9f9f9; padding: 15px; border-radius: 15px; font-size: 0.9rem; margin-top: 15px; color: #555; max-height: 200px; overflow-y: auto;">
+            </div>
+
+            <p style="color: var(--primary-color); margin-top: 15px; font-size: 0.8rem; font-weight: bold;">⚠️
+                先不要跳出，請向工作人員出示此畫面</p>
+            <button class="btn" style="margin-top: 15px; padding: 12px;"
+                onclick="document.getElementById('result-modal').style.display='none'">關閉</button>
+        </div>
+    </div>
+
+
+
+    <script>
+        // --- 頁面邏輯 ---
+        function goToPage(id) {
+            document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('nav-' + id).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // --- 聞香題庫邏輯 ---
+        // --- 聞香題庫邏輯 ---
+        const aromas = ['太妃糖', '香草', '黑醋栗', '覆盆子', '玫瑰'];
+        const correct = { 1: '太妃糖', 2: '香草', 3: '黑醋栗', 4: '覆盆子', 5: '玫瑰' };
+
+        const quizList = document.getElementById('quiz-list');
+        // 清空原本的內容 (防止重複生成)
+        quizList.innerHTML = '';
+
+        for (let i = 1; i <= 5; i++) {
+            let html = `
+                <div class="bottle-row">
+                    <div class="bottle-header">
+                        <span class="bottle-num">${i}</span>
+                        <span style="font-size:0.9rem; color:#888;">號瓶香氣</span>
+                    </div>
+                    <div class="chips-container" id="q-${i}">
+            `;
+            aromas.forEach(a => {
+                html += `<div class="chip" onclick="selectChip(${i}, this, '${a}')">${a}</div>`;
+            });
+            html += `</div><input type="hidden" id="ans-${i}"></div>`;
+            quizList.innerHTML += html;
+        }
+
+        // 選擇選項的函式保持不變
+        function selectChip(qId, el, val) {
+            const parent = document.getElementById('q-' + qId);
+            parent.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            document.getElementById('ans-' + qId).value = val;
+        }
+
+        // 修改後的檢查函式
+        function checkAroma() {
+            let score = 0;
+            let detail = '';
+            let allDone = true;
+
+            for (let i = 1; i <= 5; i++) {
+                const userAns = document.getElementById('ans-' + i).value;
+                if (!userAns) allDone = false;
+
+                // 檢查是否正確，並標示顏色
+                const isCorrect = userAns === correct[i];
+                if (isCorrect) score++;
+
+                const icon = isCorrect ? '✅' : '❌';
+                // 顯示：1號: 你的答案 (正確/錯誤)
+                detail += `<div style="margin-bottom:4px; padding-bottom:4px; border-bottom:1px solid #eee;">
+                    <b>${i}號:</b> ${correct[i]} ${isCorrect ? '' : '(你選:' + userAns + ')'} ${icon}
+                </div>`;
+            }
+
+            if (!allDone) { alert('請完成所有題目的選擇喔！'); return; }
+
+            // 取得彈窗元素
+            const modal = document.getElementById('result-modal');
+            const iconBox = document.getElementById('modal-icon-box');
+            const iconEl = document.getElementById('modal-icon');
+            const titleEl = document.getElementById('modal-title');
+
+            // 根據分數設定圖示與文字
+            if (score === 5) {
+                // 全對：皇冠 + 金色
+                iconBox.className = "modal-icon-wrapper"; // 移除搖晃
+                iconEl.className = "fas fa-crown";
+                iconEl.style.color = "#FFD700"; // 金色
+                titleEl.innerText = "完美全對！";
+                titleEl.style.color = "#FFD700";
+            } else {
+                // 沒有全對：哭臉 + 灰色
+                iconBox.className = "modal-icon-wrapper shake"; // 加入搖晃動畫
+                iconEl.className = "fas fa-sad-tear"; // 哭臉 (FontAwesome)
+                // 或是用 'fas fa-face-sad-cry' 視版本而定
+                iconEl.style.color = "#B0BEC5"; // 灰色
+                titleEl.innerText = "挑戰結束";
+                titleEl.style.color = "#333";
+            }
+
+            document.getElementById('score-display').innerText = `答對 ${score} / 5 題`;
+            document.getElementById('ans-display').innerHTML = detail;
+            modal.style.display = 'flex';
+        }
+    </script>
+</body>
+
+</html>
