@@ -296,36 +296,55 @@
 
         .bottle-row {
             display: flex;
-            flex-direction: column;
-            /* 改為垂直排列：上面是題號，下面是選項 */
-            align-items: center;
+            flex-direction: row;
+            /* 改為水平排列 */
+            align-items: flex-start;
+            /* 頂部對齊 (避免因為高度不同而置中) */
             background: #fff;
-            /* 改為純白底，更乾淨 */
-            padding: 15px;
-            border-radius: 10px;
-            /* 讓圓角跟按鈕一樣圓 */
+            padding: 20px 15px;
+            /* 增加一點內距 */
+            border-radius: 20px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             width: 100%;
             box-sizing: border-box;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+            /* 防止內容溢出 */
         }
 
+        /* 左側：題號區塊 */
         .bottle-header {
             display: flex;
+            flex-direction: column;
+            /* 題號與文字垂直排列 */
             align-items: center;
-            margin-bottom: 10px;
-            width: 100%;
-            justify-content: left;
-            /* 標題居中 */
-            position: relative;
+            /* 居中對齊 */
+            justify-content: center;
+            margin-right: 15px;
+            /* 與右側選項的間距 */
+            min-width: 60px;
+            /* 固定寬度，確保整齊 */
+            padding-top: 5px;
+            /* 稍微往下調一點，視覺平衡 */
         }
 
         .bottle-num {
             font-family: 'Noto Serif TC', serif;
-            font-size: 1.5rem;
+            font-size: 2.5rem;
+            /* 加大數字 */
             color: var(--primary-color);
             font-weight: 700;
             font-style: italic;
-            margin-right: 10px;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .bottle-label {
+            font-size: 0.8rem;
+            color: #888;
+            white-space: nowrap;
+            /* 防止文字換行 */
         }
 
         /* 選項容器：關鍵修改 */
@@ -333,7 +352,7 @@
             display: flex;
             flex-wrap: wrap;
             /* 允許換行 */
-            justify-content: center;
+            justify-content: left;
             /* 選項居中 */
             gap: 8px;
             /* 選項間距 */
@@ -341,25 +360,30 @@
         }
 
         .chip {
-            padding: 8px 12px;
-            /* 縮小一點 padding */
+            /* 這裡設定 30% 是為了強迫一行最多只能塞 3 個 (30% * 3 + gap > 90%)
+            這樣第 4、5 個選項就會自動擠到第二行，形成 3+2 的完美排列 */
+            flex: 0 0 30%;
+
+            padding: 6px 0;
+            /* 上下留白，左右不設 padding 改用置中，看起來更俐落 */
             background: #F3F3F3;
-            border-radius: 20px;
+            border-radius: 50px;
+            /* 完全圓角，現代感 */
             font-size: 0.85rem;
-            /* 字體稍微縮小以適應手機 */
-            color: #666;
+            /* 字體適中 */
+            color: #555;
             transition: all 0.2s;
             border: 1px solid transparent;
             cursor: pointer;
-            flex: 1 1 auto;
-            /* 讓選項自動分配寬度，但不小於內容 */
             text-align: center;
+            /* 文字居中 */
+
+            /* 限制最小與最大寬度，避免手機上太擠或平板上太寬 */
             min-width: 60px;
-            /* 最小寬度防止太擠 */
-            max-width: 100px;
-            /* 限制最大寬度，保持整齊 */
+            max-width: 110px;
         }
 
+        /* 選中狀態維持不變 */
         .chip.selected {
             background: var(--primary-color);
             color: white;
@@ -690,7 +714,7 @@
                     <i class="fas fa-wind"></i> 開始聞香挑戰
                 </button>
                 <button class="btn btn-secondary" onclick="goToPage('knowledge')">
-                    <i class="fas fa-book"></i> 葡萄酒知識區（⚠️內容待定，且正確性待驗證）
+                    <i class="fas fa-book"></i> 葡萄酒知識區
                 </button>
                 <button class="btn btn-secondary" onclick="goToPage('tasting')">
                     <i class="fas fa-wine-glass"></i> 品酒體驗
@@ -714,7 +738,7 @@
     </div>
 
     <div id="knowledge" class="container page-section">
-        <h2 style="margin-bottom: 20px;">波爾多知識包</h2>
+        <h2 style="margin-bottom: 20px;">波爾多知識包（⚠️內容未定⚠️）</h2>
 
         <div class="card">
             <h3>1. 認識波爾多 (Bordeaux)</h3>
