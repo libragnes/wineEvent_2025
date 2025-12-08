@@ -241,6 +241,7 @@
             }
         }
 
+
         /* --- 底部導航 Dock (深色版) --- */
         .nav-dock {
             position: fixed;
@@ -688,6 +689,49 @@
             text-align: center;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
             border-top: 5px solid var(--accent-color);
+        }
+
+
+        /* --- 倒數計時器樣式 --- */
+        #countdown-timer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px 15px;
+            border-radius: 50px;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            font-family: 'Noto Sans TC', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            z-index: 1500;
+            /* 確保在最上層，但比彈窗低 */
+            display: none;
+            /* 預設隱藏，開始挑戰才顯示 */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        /* 時間快到的警示效果 (剩30秒變紅) */
+        #countdown-timer.urgent {
+            background: var(--primary-color);
+            color: white;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
     </style>
 </head>
@@ -1283,6 +1327,10 @@
         -->
     </div>
 
+    <!-- 倒數計時器 -->
+    <div id="countdown-timer">
+        <i class="fas fa-stopwatch"></i> <span id="time-display">05:00</span>
+    </div>
 
     <div class="nav-dock">
         <button class="nav-btn active" onclick="goToPage('home')" id="nav-home"><i class="fas fa-home"></i></button>
@@ -1319,12 +1367,53 @@
     <script>
         // --- 頁面邏輯 ---
         function goToPage(id) {
+            // 1. 切換頁面顯示 (維持原本邏輯)
             document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
             document.getElementById(id).classList.add('active');
 
+            // 2. 切換導航按鈕狀態 (維持原本邏輯)
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('nav-' + id).classList.add('active');
+            const navBtn = document.getElementById('nav-' + id);
+            if (navBtn) navBtn.classList.add('active');
+
             window.scrollTo(0, 0);
+
+            // --- 🟢 修正重點：控制計時器的顯示與隱藏 ---
+            const timerUI = document.getElementById('countdown-timer');
+
+            if (id === 'aroma') {
+                // 如果是進入「聞香挑戰」
+                // 1. 顯示介紹彈窗
+                showIntroModal();
+                // 2. 先把計時器藏起來 (因為還在看介紹，等按下「開始挑戰」才會由 closeIntroModal 打開它)
+                if (timerUI) timerUI.style.display = 'none';
+            } else {
+                // 如果是去「其他頁面」 (首頁、知識、品酒)
+                // 強制隱藏計時器
+                if (timerUI) timerUI.style.display = 'none';
+            }
+        }
+
+        // --- 🟢 新增：介紹彈窗控制邏輯 ---
+        function showIntroModal() {
+            // 重置彈窗狀態：顯示第一步，隱藏第二步
+            document.getElementById('intro-step-1').style.display = 'block';
+            document.getElementById('intro-step-2').style.display = 'none';
+            // 顯示彈窗容器
+            document.getElementById('intro-modal').style.display = 'flex';
+        }
+
+        function nextIntroStep() {
+            // 切換到第二步
+            document.getElementById('intro-step-1').style.display = 'none';
+            document.getElementById('intro-step-2').style.display = 'block'; // 或 'block' 配合淡入動畫
+        }
+
+        function closeIntroModal() {
+            document.getElementById('intro-modal').style.display = 'none';
+            // 🟢 開始計時！
+            timeRemaining = 300; // 每次重新挑戰都重置為 5 分鐘
+            startTimer();
         }
 
         // --- 聞香題庫邏輯 ---
@@ -1361,49 +1450,70 @@
         }
 
         // 修改後的檢查函式
-        function checkAroma() {
+        // 修改後的檢查函式 (支援強制提交)
+        function checkAroma(isTimeUp = false) {
             let score = 0;
             let detail = '';
             let allDone = true;
 
+            // 停止計時器 (避免重複觸發)
+            clearInterval(timerInterval);
+            document.getElementById('countdown-timer').style.display = 'none';
+
             for (let i = 1; i <= 5; i++) {
                 const userAns = document.getElementById('ans-' + i).value;
-                if (!userAns) allDone = false;
 
-                // 檢查是否正確，並標示顏色
+                // 如果是用戶手動按提交，且有空白，則標記未完成
+                if (!userAns && !isTimeUp) {
+                    allDone = false;
+                }
+
+                // 檢查是否正確
                 const isCorrect = userAns === correct[i];
                 if (isCorrect) score++;
 
                 const icon = isCorrect ? '✅' : '❌';
-                // 顯示：1號: 你的答案 (正確/錯誤)
+
+                // 顯示邏輯：如果是空白，顯示 (未作答)
+                const userShow = userAns ? userAns : '未作答';
+
                 detail += `<div style="margin-bottom:4px; padding-bottom:4px; border-bottom:1px solid #eee;">
-                    <b>${i}號:</b> ${correct[i]} ${isCorrect ? '' : '(你選:' + userAns + ')'} ${icon}
+                    <b>${i}號:</b> ${correct[i]} ${isCorrect ? '' : '(你選:' + userShow + ')'} ${icon}
                 </div>`;
             }
 
-            if (!allDone) { alert('請完成所有題目的選擇喔！'); return; }
+            // 如果是用戶手動按，且沒做完，就擋住
+            if (!allDone && !isTimeUp) {
+                alert('請完成所有題目的選擇喔！');
+                // 恢復計時器顯示 (因為還沒真的結束)
+                document.getElementById('countdown-timer').style.display = 'block';
+                startTimer(); // 繼續計時 (可選)
+                return;
+            }
 
-            // 取得彈窗元素
+            // --- 以下顯示結果彈窗 (邏輯不變) ---
             const modal = document.getElementById('result-modal');
             const iconBox = document.getElementById('modal-icon-box');
             const iconEl = document.getElementById('modal-icon');
             const titleEl = document.getElementById('modal-title');
 
-            // 根據分數設定圖示與文字
             if (score === 5) {
-                // 全對：皇冠 + 金色
-                iconBox.className = "modal-icon-wrapper"; // 移除搖晃
+                iconBox.className = "modal-icon-wrapper";
                 iconEl.className = "fas fa-crown";
-                iconEl.style.color = "#FFD700"; // 金色
+                iconEl.style.color = "#FFD700";
                 titleEl.innerText = "完美全對！";
                 titleEl.style.color = "#FFD700";
             } else {
-                // 沒有全對：哭臉 + 灰色
-                iconBox.className = "modal-icon-wrapper shake"; // 加入搖晃動畫
-                iconEl.className = "fas fa-sad-tear"; // 哭臉 (FontAwesome)
-                // 或是用 'fas fa-face-sad-cry' 視版本而定
-                iconEl.style.color = "#B0BEC5"; // 灰色
-                titleEl.innerText = "挑戰結束";
+                iconBox.className = "modal-icon-wrapper shake";
+                iconEl.className = "fas fa-sad-tear";
+                iconEl.style.color = "#B0BEC5";
+
+                // 如果是時間到，標題改一下
+                if (isTimeUp) {
+                    titleEl.innerText = "時間到！挑戰結束";
+                } else {
+                    titleEl.innerText = "挑戰結束";
+                }
                 titleEl.style.color = "#333";
             }
 
@@ -1411,7 +1521,104 @@
             document.getElementById('ans-display').innerHTML = detail;
             modal.style.display = 'flex';
         }
+
+        // --- 計時器邏輯 ---
+        let timerInterval;
+        let timeRemaining = 300; // 5分鐘 = 300秒
+
+        function startTimer() {
+            // 重置時間
+            // 如果您希望每次進來都重置，把下面這行取消註解
+            // timeRemaining = 300; 
+
+            const display = document.getElementById('time-display');
+            const timerUI = document.getElementById('countdown-timer');
+
+            timerUI.style.display = 'block'; // 顯示計時器
+            timerUI.classList.remove('urgent');
+
+            // 清除舊的計時器防止重疊
+            if (timerInterval) clearInterval(timerInterval);
+
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+
+                // 計算分秒
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+
+                // 補零格式化 (例如 05:09)
+                display.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                // 剩最後 30 秒變色
+                if (timeRemaining <= 30) {
+                    timerUI.classList.add('urgent');
+                }
+
+                // 時間到
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    checkAroma(true); // 傳入 true，代表是「時間到強制提交」
+                }
+            }, 1000);
+        }
+
     </script>
+
+    <!-- 聞香挑戰彈窗 -->
+    <div id="intro-modal" class="modal-wrap" style="display: none; z-index: 3000;">
+        <div class="modal-box" style="max-width: 400px; text-align: left;">
+
+            <div id="intro-step-1">
+                <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 20px;">
+                    <i class="fas fa-search" style="font-size: 1.5rem;"></i> 尋找香氣天才
+                </h3>
+                <p style="font-size: 1rem; line-height: 1.8; color: #444;">
+                    想知道葡萄酒裡的「香氣」到底是什麼樣嗎？<br><br>
+                    我們準備了五種常在葡萄酒裡出現的經典氣味：<br>
+                    <b style="color: var(--primary-color);">太妃糖、香草、覆盆子、黑醋栗、玫瑰！</b><br><br>
+                    快來試試看你的鼻子是不是天生嗅覺小天才！✨
+                </p>
+                <button class="btn" style="margin-top: 25px;" onclick="nextIntroStep()">
+                    繼續 <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <div id="intro-step-2" style="display: none;">
+                <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 20px;">
+                    <i class="fas fa-clipboard-list" style="font-size: 1.5rem;"></i> 挑戰規則
+                </h3>
+
+                <div style="background: #F9F9F9; padding: 15px; border-radius: 15px; font-size: 0.95rem; color: #333;">
+                    <div style="margin-bottom: 10px; font-weight: bold; color: var(--primary-color);">
+                        🔶 遊戲時間：每組 5分鐘！
+                    </div>
+                    <div style="font-weight: bold; color: var(--primary-color); margin-bottom: 5px;">
+                        🔶 進行方式
+                    </div>
+                    <ul style="margin: 0; padding-left: 20px; color: #555; line-height: 1.6;">
+                        <li>領取一組 5 入聞香瓶。</li>
+                        <li>每個瓶子皆有專屬編號，請依照你的判斷填寫對應的香氣名稱。</li>
+                        <li>可重複聞、多次確認，也可與同組成員討論。</li>
+                    </ul>
+                    <div style="margin-top: 15px; font-size: 0.9rem; border-top: 1px dashed #ccc; padding-top: 10px;">
+                        🎁 <span style="color: #d32f2f;">完成後請停留在答對題數頁面</span>，讓工作夥伴確認完畢後就有可能獲得小驚喜喔！
+                    </div>
+                </div>
+
+                <button class="btn" style="margin-top: 25px;" onclick="closeIntroModal()">
+                    開始挑戰！ <i class="fas fa-flag-checkered"></i>
+                </button>
+
+
+
+
+            </div>
+
+        </div>
+    </div>
 </body>
+
+
 
 </html>
