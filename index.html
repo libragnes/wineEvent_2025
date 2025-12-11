@@ -501,7 +501,7 @@
 
         .flip-card {
             perspective: 1000px;
-            height: 380px;
+            height: 300px;
             cursor: pointer;
         }
 
@@ -569,16 +569,15 @@
             /* 極細微的質感邊框 */
         }
 
+        /* 為了確保內容在縮短後依然居中且好看，稍微調整一下正面 */
         .flip-front h1 {
             font-family: 'Noto Serif TC', serif;
-            /* 襯線體 */
-            font-size: 5rem;
-            /* 超大數字 */
+            font-size: 4rem;
+            /* 字稍微改小一點點，避免太擠 */
             color: #D5BC8A;
-            /* 香檳金 */
             margin: 0;
             line-height: 1;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .flip-front p {
@@ -1717,7 +1716,7 @@
                         style="color: var(--primary-color);">太妃糖、香草、覆盆子、黑醋栗、玫瑰！</b><br>快來試試看你的鼻子是不是天生嗅覺小天才✨</p>
 
                 <div style="text-align: center; margin: 15px 0;">
-                    <img src="aroma_intro.png" alt="香氣示意圖" style="width: 90%; max-width: 300px; height: auto;"
+                    <img src="aroma_intro3.png" alt="香氣示意圖" style="width: 90%; max-width: 300px; height: auto;"
                         onerror="this.src='https://cdn-icons-png.flaticon.com/512/2921/2921822.png'">
                 </div>
 
@@ -1822,7 +1821,7 @@
         }
 
         // --- 聞香題庫與計時器邏輯 ---
-        const aromas = ['太妃糖', '香草', '黑醋栗', '覆盆子', '玫瑰'];
+        const aromas = ['玫瑰', '覆盆子', '黑醋栗', '太妃糖', '香草'];
         const correct = { 1: '太妃糖', 2: '香草', 3: '黑醋栗', 4: '覆盆子', 5: '玫瑰' };
         let timerInterval;
         let timeRemaining = 300;
