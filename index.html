@@ -12,27 +12,24 @@
 
     <style>
         :root {
-            /* --- 您的指定配色 --- */
+            /* --- 網站配色 --- */
             --primary-color: #7F181B;
-            /* 酒紅：主按鈕、重點文字 */
+            /* 酒紅 */
             --accent-color: #D5BC8A;
-            /* 香檳金：背景動畫、Icon裝飾、次要按鈕 */
+            /* 香檳金 */
             --bg-color: #ECECEC;
-            /* 霧白：整體網頁背景 */
+            /* 霧白背景 */
             --card-bg: #FFFFFF;
-            /* 純白：卡片背景 */
+            /* 卡片白 */
             --text-main: #131313;
-            /* 尊爵黑：主要標題 */
+            /* 尊爵黑 */
             --text-sub: #555555;
-            /* 深灰：內文 */
+            /* 深灰 */
 
             /* --- 設計變數 --- */
             --radius-btn: 50px;
-            /* 膠囊按鈕 */
             --radius-card: 20px;
-            /* 卡片圓角 */
             --shadow-card: 0 10px 30px rgba(19, 19, 19, 0.05);
-            /* 極淡的黑色陰影 */
             --nav-height: 80px;
         }
 
@@ -51,7 +48,7 @@
             line-height: 1.6;
         }
 
-        /* --- 容器與通用樣式 --- */
+        /* --- 通用容器 --- */
         .container {
             max-width: 500px;
             margin: 0 auto;
@@ -67,118 +64,15 @@
             color: var(--text-main);
         }
 
-        /* 大標題使用襯線體 (Serif) 更有酒莊質感 */
         h1,
-        h2 {
+        h2,
+        .section-title {
             font-family: 'Noto Serif TC', serif;
-        }
-
-        /* --- 首頁 Hero Section (含動畫) --- */
-        .hero-layout {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 85vh;
-            /* 讓畫面垂直置中 */
-            text-align: center;
-            position: relative;
-        }
-
-        /* 圖片容器 */
-        .hero-image-container {
-            position: relative;
-            width: 280px;
-            height: 280px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 40px;
-        }
-
-        /* 有機流動圓形動畫 (Blob) */
-        .blob-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--accent-color);
-            /* 香檳金 */
-            border-radius: 70%;
-            opacity: 0.4;
-            /* 調整透明度，不要搶過圖片 */
-            z-index: -1;
-            animation: morph 8s ease-in-out infinite;
-            filter: blur(1px);
-            /* 稍微柔化邊緣 */
-        }
-
-        /* CSS 變形動畫關鍵影格 */
-        @keyframes morph {
-            0% {
-                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            }
-
-            50% {
-                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-            }
-
-            100% {
-                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            }
-        }
-
-        .hero-img {
-            width: 90%;
-            height: auto;
-            object-fit: contain;
-            /* 輕微浮動效果 */
-            /*animation: float 4s ease-in-out infinite;*/
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        .main-title {
-            font-size: 2.5rem;
-            margin-bottom: 8px;
-            letter-spacing: 2px;
-        }
-
-        .sub-title {
-            font-size: 1rem;
-            color: var(--text-sub);
-            letter-spacing: 1px;
-            margin-bottom: 50px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .sub-title::after {
-            content: '';
-            display: block;
-            width: 30px;
-            height: 3px;
-            background: var(--accent-color);
-            /* 香檳金裝飾線 */
-            margin: 10px auto 0;
         }
 
         /* --- 按鈕樣式 --- */
         .btn {
             background-color: var(--primary-color);
-            /* 酒紅 */
             color: #FFFFFF;
             border: none;
             width: 100%;
@@ -192,17 +86,15 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            transition: transform 0.2s, background-color 0.2s;
+            transition: transform 0.2s;
             margin-bottom: 16px;
         }
 
         .btn:active {
             transform: scale(0.98);
             background-color: #5a0e10;
-            /* 按下變深 */
         }
 
-        /* 次要按鈕樣式 (Outline Style) */
         .btn-secondary {
             background-color: transparent;
             border: 2px solid var(--primary-color);
@@ -210,16 +102,7 @@
             box-shadow: none;
         }
 
-        /* --- 卡片與內容樣式 --- */
-        .card {
-            background: var(--card-bg);
-            border-radius: var(--radius-card);
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow-card);
-        }
-
-        /* 頁面切換 */
+        /* --- 頁面切換 --- */
         .page-section {
             display: none;
             animation: fadeIn 0.5s ease-out;
@@ -241,19 +124,18 @@
             }
         }
 
-
-        /* --- 底部導航 Dock (深色版) --- */
+        /* --- 底部導航 Dock --- */
         .nav-dock {
             position: fixed;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             background: #131313;
-            /* 尊爵黑背景 */
             padding: 10px 25px;
             border-radius: 50px;
             display: flex;
-            gap: 25px;
+            gap: 20px;
+            /* 稍微縮小間距以容納5個按鈕 */
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
             z-index: 1000;
         }
@@ -262,8 +144,7 @@
             background: transparent;
             border: none;
             color: #666;
-            /* 未選中顏色 */
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
@@ -273,67 +154,141 @@
 
         .nav-btn.active {
             color: var(--accent-color);
-            /* 選中變成香檳金 */
             transform: translateY(-3px);
         }
 
-        /* --- 聞香頁面 (Chips) --- */
-        /* --- Here !! 優化版聞香頁面樣式 --- */
+        /* --- 首頁 Hero Section --- */
+        .hero-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 85vh;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-image-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .blob-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            opacity: 0.4;
+            z-index: -1;
+            animation: morph 8s ease-in-out infinite;
+            filter: blur(1px);
+        }
+
+        @keyframes morph {
+            0% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+
+            50% {
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            }
+
+            100% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+        }
+
+        .hero-img {
+            width: 90%;
+            height: auto;
+            object-fit: contain;
+            animation: float 4s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+
+        .sub-title {
+            font-size: 1rem;
+            color: var(--text-sub);
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .sub-title::after {
+            content: '';
+            display: block;
+            width: 30px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 10px auto 0;
+        }
+
+        /* --- 聞香頁面樣式 --- */
         #aroma .container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            /* 讓所有內容居中 */
         }
 
         .aroma-grid {
             display: grid;
             gap: 15px;
             width: 100%;
-            /* 寬度佔滿容器 */
             max-width: 100%;
-            /* 確保不超過手機寬度 */
         }
 
         .bottle-row {
             display: flex;
             flex-direction: row;
-            /* 改為水平排列 */
             align-items: flex-start;
-            /* 頂部對齊 (避免因為高度不同而置中) */
             background: #fff;
             padding: 20px 15px;
-            /* 增加一點內距 */
             border-radius: 20px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             width: 100%;
-            box-sizing: border-box;
             margin-bottom: 15px;
-            position: relative;
-            overflow: hidden;
-            /* 防止內容溢出 */
         }
 
-        /* 左側：題號區塊 */
         .bottle-header {
             display: flex;
             flex-direction: column;
-            /* 題號與文字垂直排列 */
             align-items: center;
-            /* 居中對齊 */
             justify-content: center;
             margin-right: 15px;
-            /* 與右側選項的間距 */
             min-width: 60px;
-            /* 固定寬度，確保整齊 */
             padding-top: 5px;
-            /* 稍微往下調一點，視覺平衡 */
         }
 
         .bottle-num {
             font-family: 'Noto Serif TC', serif;
             font-size: 2.5rem;
-            /* 加大數字 */
             color: var(--primary-color);
             font-weight: 700;
             font-style: italic;
@@ -345,68 +300,66 @@
             font-size: 0.8rem;
             color: #888;
             white-space: nowrap;
-            /* 防止文字換行 */
         }
 
-        /* 選項容器：關鍵修改 */
         .chips-container {
             display: flex;
             flex-wrap: wrap;
-            /* 允許換行 */
-            justify-content: left;
-            /* 選項居中 */
+            justify-content: flex-start;
+            align-content: flex-start;
             gap: 8px;
-            /* 選項間距 */
             width: 100%;
         }
 
         .chip {
-            /* 這裡設定 30% 是為了強迫一行最多只能塞 3 個 (30% * 3 + gap > 90%)
-            這樣第 4、5 個選項就會自動擠到第二行，形成 3+2 的完美排列 */
-            flex: 0 0 30%;
-
-            padding: 6px 0;
-            /* 上下留白，左右不設 padding 改用置中，看起來更俐落 */
+            flex: 0 0 auto;
+            padding: 6px 16px;
             background: #F3F3F3;
             border-radius: 50px;
-            /* 完全圓角，現代感 */
             font-size: 0.85rem;
-            /* 字體適中 */
             color: #555;
-            transition: all 0.2s;
             border: 1px solid transparent;
             cursor: pointer;
             text-align: center;
-            /* 文字居中 */
-
-            /* 限制最小與最大寬度，避免手機上太擠或平板上太寬 */
-            min-width: 60px;
-            max-width: 110px;
         }
 
-        /* 選中狀態維持不變 */
         .chip.selected {
             background: var(--primary-color);
             color: white;
-            box-shadow: 0 4px 10px rgba(127, 24, 27, 0.2);
+            box-shadow: 0 3px 8px rgba(127, 24, 27, 0.2);
         }
 
-        /* --- 結果彈窗樣式 (新增動畫與狀態) --- */
-        .modal-icon-wrapper {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            animation: bounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* 計時器 */
+        #countdown-timer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px 15px;
+            border-radius: 50px;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            font-family: 'Noto Sans TC', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            z-index: 1500;
+            display: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        @keyframes bounceIn {
+        #countdown-timer.urgent {
+            background: var(--primary-color);
+            color: white;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
             0% {
-                transform: scale(0);
-                opacity: 0;
+                transform: scale(1);
             }
 
-            60% {
-                transform: scale(1.2);
-                opacity: 1;
+            50% {
+                transform: scale(1.05);
             }
 
             100% {
@@ -414,28 +367,7 @@
             }
         }
 
-        /* 失敗時的搖晃動畫 */
-        .modal-icon-wrapper.shake {
-            animation: shake 0.5s ease-in-out;
-        }
-
-        @keyframes shake {
-
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-
-            25% {
-                transform: translateX(-10px);
-            }
-
-            75% {
-                transform: translateX(10px);
-            }
-        }
-
-        /* --- 知識頁面 --- */
+        /* --- 知識頁面樣式 --- */
         .info-table {
             width: 100%;
             border-collapse: collapse;
@@ -456,77 +388,109 @@
             border-bottom: 1px solid #eee;
         }
 
-        .map-box {
-            background: #E8F1F5;
-            /* 稍微帶藍的灰，模擬水色 */
-            height: 220px;
-            border-radius: var(--radius-card);
-            position: relative;
-            overflow: hidden;
-            margin: 20px 0;
-            border: 2px solid #fff;
-        }
-
-        .map-river {
-            position: absolute;
-            left: 50%;
-            height: 100%;
-            width: 15px;
-            background: #fff;
-            /* 用白色負空間代表河流 */
-            transform: skewX(-10deg) translateX(-50%);
-            opacity: 0.8;
-        }
-
-        .map-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 30px;
-            font-weight: 700;
-            color: var(--primary-color);
-            font-size: 0.9rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            cursor: pointer;
-        }
-
-        .map-left {
-            left: 15%;
-        }
-
-        .map-right {
-            right: 15%;
-        }
-
-        /* --- 品酒頁面 (翻牌) --- */
-        .tasting-steps {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-            padding: 0 10px;
-        }
-
-        .step-item {
-            text-align: center;
-            color: var(--text-sub);
-        }
-
-        .step-icon {
-            width: 55px;
-            height: 55px;
+        .card {
             background: var(--card-bg);
-            border: 1px solid #eee;
+            border-radius: var(--radius-card);
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-card);
+        }
+
+        /* --- 品酒頁面樣式 --- */
+        .tasting-guide {
+            margin-bottom: 40px;
+        }
+
+        .guide-item {
+            background: var(--card-bg);
+            border-radius: 15px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .guide-item.active {
+            border-color: var(--accent-color);
+            box-shadow: 0 8px 20px rgba(213, 188, 138, 0.2);
+        }
+
+        .guide-header {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            cursor: pointer;
+            background: #fff;
+        }
+
+        .guide-icon {
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
+            background: var(--primary-color);
+            color: var(--accent-color);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            color: var(--accent-color);
-            /* 香檳金 Icon */
-            margin: 0 auto 8px;
-            box-shadow: var(--shadow-card);
+            margin-right: 15px;
+            font-size: 0.9rem;
+        }
+
+        .guide-title {
+            flex-grow: 1;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text-main);
+        }
+
+        .guide-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background: #FAFAFA;
+            padding: 0 20px;
+        }
+
+        .guide-item.active .guide-content {
+            padding-bottom: 20px;
+        }
+
+        .scent-box {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .scent-row {
+            display: flex;
+            align-items: baseline;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .scent-tag {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: white;
+            margin-right: 8px;
+            flex-shrink: 0;
+            width: 85px;
+            text-align: center;
+        }
+
+        .primary {
+            background: #E57373;
+        }
+
+        .secondary {
+            background: #FFB74D;
+        }
+
+        .tertiary {
+            background: #8D6E63;
         }
 
         .flip-grid {
@@ -547,8 +511,8 @@
             height: 100%;
             transition: transform 0.6s;
             transform-style: preserve-3d;
-            border-radius: var(--radius-card);
-            box-shadow: var(--shadow-card);
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
         }
 
         .flip-card.flipped .flip-inner {
@@ -556,75 +520,113 @@
         }
 
         .flip-front,
+        /* --- 修正版：翻牌卡片樣式 --- */
+        .flip-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .flip-card {
+            perspective: 1000px;
+            height: 340px;
+            /* 拉長比例，符合您截圖中的長方形 */
+            cursor: pointer;
+        }
+
+        .flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            border-radius: 24px;
+            /* 圓角 */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            /* 更有質感的陰影 */
+        }
+
+        .flip-card.flipped .flip-inner {
+            transform: rotateY(180deg);
+        }
+
+        /* --- 正面：酒紅底 + 金字 --- */
+        .flip-front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 24px;
+
+            /* 您的指定樣式 */
+            background-color: #7F181B;
+            /* 深酒紅 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            /* 極細微的質感邊框 */
+        }
+
+        .flip-front h1 {
+            font-family: 'Noto Serif TC', serif;
+            /* 襯線體 */
+            font-size: 5rem;
+            /* 超大數字 */
+            color: #D5BC8A;
+            /* 香檳金 */
+            margin: 0;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .flip-front p {
+            font-family: 'Noto Sans TC', sans-serif;
+            color: #FFFFFF;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            /* 字距拉開，更有質感 */
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        /* --- 背面：滿版圖片 --- */
         .flip-back {
             position: absolute;
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: var(--radius-card);
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            background: var(--card-bg);
-        }
-
-        .flip-front {
-            align-items: center;
-            justify-content: center;
-            background: var(--primary-color);
-            /* 酒紅背景 */
-            color: white;
-        }
-
-        .flip-front h1 {
-            color: var(--accent-color);
-            font-size: 3rem;
-            margin: 0;
-            color: var(--accent-color);
-            /* 香檳金數字 */
-            font-family: 'Noto Serif TC', serif;
-        }
-
-        .flip-back {
             transform: rotateY(180deg);
-            align-items: flex-start;
-            justify-content: center;
-            border: 1px solid var(--accent-color);
-            /* 金邊 */
+            border-radius: 24px;
+
+            /* 清除所有內距，確保圖片滿版 */
+            padding: 0 !important;
+            background-color: #fff;
+            overflow: hidden;
+            /* 確保圖片圓角不跑版 */
         }
 
-        .flavor-tag {
-            display: inline-block;
-            color: var(--text-sub);
-            font-size: 0.85rem;
-            margin: 3px 0;
+        /* 讓您的圖片填滿整個卡片 */
+        .full-bleed-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* 填滿容器，可能會稍微裁切邊緣以維持比例 */
+            /* 如果不想裁切圖片，請改用 object-fit: fill; (會變形) 或 contain; (留白) */
+            display: block;
         }
-
-        /* from here 酒瓶圖片 */
-
-
 
         .wine-card-img {
-            /* 1. 設定一個固定的矩形空間給圖片 */
             height: 160px;
-            /* 固定高度，確保每張卡片圖片區塊一樣高 */
-            width: 100%;
-            /* 寬度佔滿容器 */
-
-            /* 2. 讓圖片保持比例縮放，完整顯示在框框內 (不裁切、不變形) */
+            width: auto;
             object-fit: contain;
-
-            /* 3. 設定圖片對齊位置：靠下置中 (讓酒瓶看起來站在同一水平線上) */
-            object-position: center bottom;
-
             margin-bottom: 15px;
             filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.1));
         }
 
-        /* 酒名與資訊 */
         .wine-title {
             color: #7F181B;
-            /* 深酒紅標題 */
             font-family: 'Noto Serif TC', serif;
             font-weight: 700;
             font-size: 1.1rem;
@@ -634,17 +636,14 @@
 
         .wine-sub {
             color: #888;
-            /* 灰色副標 */
             font-size: 0.85rem;
             margin-bottom: 15px;
             font-weight: 400;
         }
 
-        /* 風味列表 (靠左對齊) */
         .wine-flavors {
             width: 100%;
             text-align: left;
-            /* 讓風味文字靠左，比較整齊 */
             font-size: 0.85rem;
             color: #444;
             padding-left: 5px;
@@ -656,13 +655,317 @@
             align-items: center;
         }
 
-        .flavor-row i {
-            margin-right: 8px;
-            width: 20px;
+        /* --- 團隊介紹頁面樣式 (整合版) --- */
+        .team-photo-section {
+            margin-bottom: 40px;
+        }
+
+        .team-photo-container {
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            box-shadow: 0 4px 20px rgba(127, 24, 27, 0.08);
+        }
+
+        .team-photo-placeholder {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #d4b896 0%, #c4985f 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: white;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 12px auto 0;
+            border-radius: 2px;
+        }
+
+        .journey-map {
+            background: white;
+            border-radius: 20px;
+            padding: 24px 16px;
+            box-shadow: 0 4px 20px rgba(127, 24, 27, 0.08);
+            margin-bottom: 30px;
+            overflow-x: auto;
+        }
+
+        .route {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: nowrap;
+            white-space: nowrap;
+            min-width: max-content;
+        }
+
+        .city {
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .city-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .city-days {
+            font-size: 11px;
+            color: #999;
+        }
+
+        .arrow {
+            font-size: 16px;
+            color: var(--accent-color);
+            flex-shrink: 0;
+        }
+
+        .expandable-section {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(127, 24, 27, 0.08);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .section-header-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .expand-icon {
+            color: var(--accent-color);
+            transition: transform 0.3s;
+            font-size: 18px;
+        }
+
+        .expand-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .expandable-content.expanded {
+            max-height: 5000px;
+        }
+
+        .content-inner {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e5dcc8;
+        }
+
+        .highlight-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .highlight-card {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #a63d3d 100%);
+            border-radius: 16px;
+            padding: 20px 12px;
+            text-align: center;
+            color: white;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .highlight-number {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .highlight-text {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .team-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .team-tab {
+            padding: 10px 25px;
+            background: white;
+            border: 1px solid var(--accent-color);
+            border-radius: 25px;
+            font-size: 15px;
+            color: #999;
+            cursor: pointer;
+        }
+
+        .team-tab.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        .team-content {
+            display: none;
+        }
+
+        .team-content.active {
+            display: block;
+        }
+
+        /* --- 團隊成員網格優化 (5x2 排列) --- */
+        .team-grid {
+            display: grid;
+            /* 強制分為 5 行 */
+            grid-template-columns: repeat(5, 1fr);
+            /* 縮小間距以容納 5 個頭像 */
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-items: center;
+            /* 讓頭像水平居中 */
+        }
+
+        .member-avatar {
+            /* 調整頭像大小以適應手機寬度 */
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            /* 邊框與陰影維持不變 */
+            background: linear-gradient(135deg, #d4b896 0%, #c4985f 100%);
+            border: 2px solid white;
+            box-shadow: 0 4px 10px rgba(127, 24, 27, 0.2);
+
+            /* 圖片裁切設定 */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            /* 移除外距，由 Grid gap 控制 */
+        }
+
+        /* 確保圖片填滿圓形且不變形 */
+        .member-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ⚠️ 重要：覆蓋掉原本針對第9、10人的特殊排版 */
+        .team-member:nth-child(9),
+        .team-member:nth-child(10) {
+            grid-column: auto !important;
+            /* 還原為自動排列 */
+        }
+
+        /* 手機極窄螢幕微調 (避免 5 個太擠) */
+        @media (max-width: 360px) {
+            .team-grid {
+                gap: 5px;
+            }
+
+            .member-avatar {
+                width: 48px;
+                height: 48px;
+            }
+        }
+
+        .team-list {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 12px rgba(127, 24, 27, 0.08);
+        }
+
+        .team-members-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .member-card {
+            background: #f8f4ee;
+            border-radius: 12px;
+            padding: 12px;
             text-align: center;
         }
 
-        /* to here */
+        .member-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .member-role {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .navigator-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(127, 24, 27, 0.08);
+            margin-bottom: 15px;
+        }
+
+        .navigator-photo {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #d4b896 0%, #c4985f 100%);
+            border-radius: 12px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .navigator-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
 
         /* 彈窗 */
         .modal-wrap {
@@ -672,7 +975,6 @@
             width: 100%;
             height: 100%;
             background: rgba(19, 19, 19, 0.8);
-            /* 黑色半透明背景 */
             z-index: 2000;
             display: none;
             align-items: center;
@@ -691,67 +993,192 @@
             border-top: 5px solid var(--accent-color);
         }
 
-
-        /* --- 倒數計時器樣式 --- */
-        #countdown-timer {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 8px 15px;
-            border-radius: 50px;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            font-family: 'Noto Sans TC', sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            z-index: 1500;
-            /* 確保在最上層，但比彈窗低 */
-            display: none;
-            /* 預設隱藏，開始挑戰才顯示 */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
+        .modal-icon-wrapper {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: bounceIn 0.5s;
         }
 
-        /* 時間快到的警示效果 (剩30秒變紅) */
-        #countdown-timer.urgent {
-            background: var(--primary-color);
-            color: white;
-            animation: pulse 1s infinite;
+        .modal-icon-wrapper.shake {
+            animation: shake 0.5s ease-in-out;
         }
 
-        @keyframes pulse {
+        @keyframes bounceIn {
             0% {
-                transform: scale(1);
+                transform: scale(0);
+                opacity: 0;
             }
 
-            50% {
-                transform: scale(1.05);
+            60% {
+                transform: scale(1.2);
+                opacity: 1;
             }
 
             100% {
                 transform: scale(1);
             }
         }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-10px);
+            }
+
+            75% {
+                transform: translateX(10px);
+            }
+        }
+
+
+        .full-screen-modal .modal-box {
+            width: 95%;
+            max-width: 500px;
+            height: 85vh;
+            /* 佔據畫面 85% 高度 */
+            max-height: 800px;
+            padding: 0;
+            /* 清除內距，讓 Header 貼邊 */
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            /* 防止外層滾動 */
+            border-radius: 20px 20px 0 0;
+            /* 上方圓角 */
+            position: absolute;
+            bottom: 0;
+            /* 從底部滑出 */
+            top: auto;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            padding: 20px;
+            background: white;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+        }
+
+        .close-btn {
+            background: #f0f0f0;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            color: #666;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .modal-content-body {
+            padding: 20px;
+            overflow-y: auto;
+            /* 內部滾動 */
+            flex-grow: 1;
+            text-align: left;
+            /* 內容靠左 */
+        }
+
+        .detail-block h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 10px;
+        }
+
+        .detail-block p {
+            font-size: 0.95rem;
+            color: #444;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        /* 雙圖片排列 */
+        .img-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .detail-img {
+            width: 100%;
+            height: 120px;
+            /* 固定高度，保持整齊 */
+            object-fit: cover;
+            border-radius: 10px;
+            background: #eee;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px dashed #ddd;
+            margin: 25px 0;
+        }
+
+        /* --- 領航員照片優化 --- */
+        .navigator-photo {
+            /* 確保圖片裁切在圓角內 */
+            overflow: hidden;
+            padding: 0;
+            /* 清除內距 */
+            background: #eee;
+            /* 圖片載入前的底色 */
+        }
+
+        .navigator-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* 確保填滿且不變形 */
+            display: block;
+        }
     </style>
 </head>
 
 <body>
 
+    <div id="countdown-timer">
+        <i class="fas fa-stopwatch"></i> <span id="time-display">05:00</span>
+    </div>
+
     <div id="home" class="container page-section active">
         <div class="hero-layout">
-
             <div class="hero-image-container">
                 <div class="blob-bg"></div>
-
                 <img src="hero-image.png" alt="Hero" class="hero-img"
                     onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081840.png'">
             </div>
 
             <h1 class="main-title">釀出新未來</h1>
             <div class="sub-title">青年百億海外圓夢基金計畫</div>
-
-
 
             <div style="width: 100%; max-width: 320px;">
                 <button class="btn" onclick="goToPage('aroma')">
@@ -763,9 +1190,10 @@
                 <button class="btn btn-secondary" onclick="goToPage('tasting')">
                     <i class="fas fa-wine-glass"></i> 品酒體驗
                 </button>
+                <button class="btn btn-secondary" onclick="goToPage('team')">
+                    <i class="fas fa-users"></i> 團隊介紹
+                </button>
             </div>
-
-
         </div>
     </div>
 
@@ -776,22 +1204,20 @@
         <div id="quiz-list" class="aroma-grid">
         </div>
 
-        <button class="btn" style="margin-top: 30px;" onclick="checkAroma()">
+        <button class="btn" style="margin-top: 30px;" onclick="checkAroma(false)">
             提交答案
         </button>
     </div>
 
     <div id="knowledge" class="container page-section">
-        <h2 style="margin-bottom: 20px;">波爾多知識包（⚠️內容未定⚠️）</h2>
+        <h2 style="margin-bottom: 20px;">波爾多知識包</h2>
 
         <div class="card">
             <h3>1. 認識波爾多 (Bordeaux)</h3>
-
             <div style="text-align: center; margin: 20px 0;">
                 <img src="bordeaux-location.png" alt="波爾多位置圖" style="width: 80%; max-width: 250px; border-radius: 10px;"
                     onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Bordeaux_in_France.svg/300px-Bordeaux_in_France.svg.png'">
             </div>
-
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: left;">
                 <div style="background: #F9F9F9; padding: 15px; border-radius: 15px;">
                     <i class="fas fa-cloud-sun-rain"
@@ -806,7 +1232,6 @@
                     <p style="font-size: 0.85rem; margin: 0;">Cabernet Sauvignon<br>Merlot<br>Sauvignon Blanc</p>
                 </div>
             </div>
-
             <div style="margin-top: 20px; border-top: 1px dashed #ddd; padding-top: 15px;">
                 <h4 style="color: var(--primary-color);">🍷 經典風味</h4>
                 <p style="font-size: 0.9rem; margin-bottom: 10px;">厚實、架構強的大酒體</p>
@@ -821,20 +1246,14 @@
         <div class="card">
             <h3>2. 混釀的藝術</h3>
             <p style="font-size: 0.9rem; color: #666;">為什麼不只用一種葡萄？</p>
-
             <ul style="list-style: none; padding: 0; margin-bottom: 20px;">
-                <li style="margin-bottom: 10px; display: flex; align-items: start;">
-                    <i class="fas fa-check-circle"
-                        style="color: var(--accent-color); margin-top: 4px; margin-right: 10px;"></i>
-                    <span><b>分散風險：</b>氣候潮濕不穩，單一品種容易失敗。</span>
+                <li style="margin-bottom: 10px; display: flex; align-items: start;"><i class="fas fa-check-circle"
+                        style="color: var(--accent-color); margin-top: 4px; margin-right: 10px;"></i><span><b>分散風險：</b>氣候潮濕不穩，單一品種容易失敗。</span>
                 </li>
-                <li style="display: flex; align-items: start;">
-                    <i class="fas fa-check-circle"
-                        style="color: var(--accent-color); margin-top: 4px; margin-right: 10px;"></i>
-                    <span><b>互補平衡：</b>運用不同葡萄個性，維持品質穩定。</span>
+                <li style="display: flex; align-items: start;"><i class="fas fa-check-circle"
+                        style="color: var(--accent-color); margin-top: 4px; margin-right: 10px;"></i><span><b>互補平衡：</b>運用不同葡萄個性，維持品質穩定。</span>
                 </li>
             </ul>
-
             <h4 style="margin-bottom: 10px; border-left: 4px solid var(--primary-color); padding-left: 10px;">🍇 葡萄的角色
             </h4>
             <div style="display: flex; flex-direction: column; gap: 10px;">
@@ -854,21 +1273,16 @@
                     <div style="font-size: 0.9rem; margin-left: 10px;">🌸 細緻香氣、優雅</div>
                 </div>
             </div>
-
-            <div style="margin-top: 15px; background: #eee; padding: 10px; border-radius: 8px; font-size: 0.85rem;">
-                💡 <b>混釀 vs 單一：</b>混釀追求平衡穩定；單一追求純粹個性。
-            </div>
         </div>
 
         <div class="card">
             <h3>3. 波爾多左右岸</h3>
             <p style="font-size: 0.9rem;">以吉倫特河 (Gironde) 為界，地理位置如下：</p>
-
             <div style="text-align: center; margin: 20px 0;">
                 <img src="leftRightBank.png" alt="波爾多左右岸地圖"
-                    style="width: 100%; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                    style="width: 100%; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"
+                    onerror="this.src='https://cdn-icons-png.flaticon.com/512/854/854878.png'">
             </div>
-
             <h4 style="margin-top: 20px; margin-bottom: 10px;">⚔️ 左右岸大對決</h4>
             <table class="info-table" style="font-size: 0.85rem;">
                 <tr style="background: #f4f4f4;">
@@ -900,17 +1314,14 @@
         </div>
     </div>
 
-
     <div id="tasting" class="container page-section">
-        <h2 style="margin-bottom: 20px;">品酒方式</h2>
+        <h2 style="margin-bottom: 20px;">品酒筆記</h2>
 
         <div class="tasting-guide">
-
             <div class="guide-item" onclick="toggleGuide(this)">
                 <div class="guide-header">
                     <div class="guide-icon"><i class="fas fa-eye"></i></div>
-                    <div class="guide-title">1. 看 (Look)</div>
-                    <i class="fas fa-chevron-down arrow"></i>
+                    <div class="guide-title">1. 看 (Look)</div><i class="fas fa-chevron-down arrow"></i>
                 </div>
                 <div class="guide-content">
                     <p>觀察酒液的狀態：</p>
@@ -920,70 +1331,42 @@
                     </ul>
                 </div>
             </div>
-
             <div class="guide-item" onclick="toggleGuide(this)">
                 <div class="guide-header">
                     <div class="guide-icon"><i class="fas fa-wind"></i></div>
-                    <div class="guide-title">2. 聞 (Smell)</div>
-                    <i class="fas fa-chevron-down arrow"></i>
+                    <div class="guide-title">2. 聞 (Smell)</div><i class="fas fa-chevron-down arrow"></i>
                 </div>
                 <div class="guide-content">
                     <p>深吸香氣，感受強度與層次：</p>
                     <div class="scent-box">
-                        <div class="scent-row">
-                            <span class="scent-tag primary">初級 (葡萄)</span>
-                            <span>紅/黑水果、花香、草本</span>
+                        <div class="scent-row"><span class="scent-tag primary">初級 (葡萄)</span><span>紅/黑水果、花香、草本</span>
                         </div>
-                        <div class="scent-row">
-                            <span class="scent-tag secondary">次級 (釀造)</span>
-                            <span>酵母、奶油、烤麵包</span>
+                        <div class="scent-row"><span class="scent-tag secondary">次級 (釀造)</span><span>酵母、奶油、烤麵包</span>
                         </div>
-                        <div class="scent-row">
-                            <span class="scent-tag tertiary">三級 (陳年)</span>
-                            <span>皮革、煙草、堅果、蜂蜜</span>
+                        <div class="scent-row"><span class="scent-tag tertiary">三級 (陳年)</span><span>皮革、煙草、堅果、蜂蜜</span>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="guide-item" onclick="toggleGuide(this)">
                 <div class="guide-header">
                     <div class="guide-icon"><i class="fas fa-wine-glass-alt"></i></div>
-                    <div class="guide-title">3. 嚐 (Taste)</div>
-                    <i class="fas fa-chevron-down arrow"></i>
+                    <div class="guide-title">3. 嚐 (Taste)</div><i class="fas fa-chevron-down arrow"></i>
                 </div>
                 <div class="guide-content">
                     <ul class="detail-list">
-                        <li>
-                            <b>酸度：</b>
-                            <span>口腔兩側是否流口水？</span>
-                        </li>
-                        <li>
-                            <b>甜度：</b>
-                            <span>舌尖感受。乾型 / 微甜 / 明顯甜？</span>
-                        </li>
-                        <li>
-                            <b>單寧 (澀感)：</b>
-                            <span>牙齦乾澀收斂感。<br>
-
-                        </li>
-                        <li>
-                            <b>酒體 (Body)：</b>
-                            <span>口感重量。輕盈 / 適中 / 濃厚？</span>
-                        </li>
-                        <li>
-                            <b>餘韻：</b>
-                            <span>吞下後味道停留時間。短 / 中 / 長？</span>
-                        </li>
+                        <li><b>酸度：</b><span>口腔兩側是否流口水？</span></li>
+                        <li><b>甜度：</b><span>舌尖感受。乾型 / 微甜 / 明顯甜？</span></li>
+                        <li><b>單寧：</b><span>牙齦乾澀收斂感。<small style="color:#888;"> 低 / 中 / 高</small></span></li>
+                        <li><b>酒體：</b><span>口感重量。輕盈 / 適中 / 濃厚？</span></li>
+                        <li><b>餘韻：</b><span>吞下後味道停留時間。</span></li>
                     </ul>
                 </div>
             </div>
-
             <div class="guide-item" onclick="toggleGuide(this)">
                 <div class="guide-header">
                     <div class="guide-icon"><i class="fas fa-clipboard-check"></i></div>
-                    <div class="guide-title">4. 判斷 (Conclusion)</div>
-                    <i class="fas fa-chevron-down arrow"></i>
+                    <div class="guide-title">4. 判斷 (Conclusion)</div><i class="fas fa-chevron-down arrow"></i>
                 </div>
                 <div class="guide-content">
                     <p>綜合以上感受，給予評價：</p>
@@ -994,206 +1377,19 @@
                     </ul>
                 </div>
             </div>
-
         </div>
 
-        <style>
-            /* 手風琴容器 */
-            .tasting-guide {
-                margin-bottom: 40px;
-            }
-
-            .guide-item {
-                background: var(--card-bg);
-                border-radius: 15px;
-                margin-bottom: 12px;
-                overflow: hidden;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-                transition: all 0.3s;
-                border: 1px solid transparent;
-            }
-
-            /* 選中狀態 */
-            .guide-item.active {
-                border-color: var(--accent-color);
-                /* 香檳金邊框 */
-                box-shadow: 0 8px 20px rgba(213, 188, 138, 0.2);
-            }
-
-            /* 標題列 */
-            .guide-header {
-                display: flex;
-                align-items: center;
-                padding: 15px 20px;
-                cursor: pointer;
-                background: #fff;
-            }
-
-            .guide-icon {
-                width: 36px;
-                height: 36px;
-                border-radius: 50%;
-                background: var(--primary-color);
-                color: var(--accent-color);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-right: 15px;
-                font-size: 0.9rem;
-            }
-
-            .guide-title {
-                flex-grow: 1;
-                font-weight: 700;
-                font-size: 1.05rem;
-                color: var(--text-main);
-            }
-
-            .guide-header .arrow {
-                color: #ccc;
-                transition: transform 0.3s;
-            }
-
-            .guide-item.active .arrow {
-                transform: rotate(180deg);
-                color: var(--primary-color);
-            }
-
-            /* 內容區塊 (預設隱藏) */
-            .guide-content {
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.4s ease-out;
-                background: #FAFAFA;
-                padding: 0 20px;
-                /* 上下 padding 用動畫控制 */
-            }
-
-            .guide-item.active .guide-content {
-                padding-bottom: 20px;
-                /* 展開時給予底部空間 */
-                /* max-height 由 JS 動態計算或設一個夠大的值 */
-            }
-
-            /* 內容樣式微調 */
-            .guide-content ul {
-                padding-left: 20px;
-                margin: 10px 0;
-                font-size: 0.9rem;
-                color: #555;
-            }
-
-            .guide-content li {
-                margin-bottom: 6px;
-            }
-
-            /* 香氣分類標籤 */
-            .scent-box {
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-                margin-top: 10px;
-            }
-
-            .scent-row {
-                display: flex;
-                align-items: baseline;
-                font-size: 0.85rem;
-                color: #555;
-            }
-
-            .scent-tag {
-                font-size: 0.75rem;
-                padding: 2px 8px;
-                border-radius: 4px;
-                color: white;
-                margin-right: 8px;
-                flex-shrink: 0;
-                width: 85px;
-                text-align: center;
-            }
-
-            .primary {
-                background: #E57373;
-            }
-
-            /* 紅色系 */
-            .secondary {
-                background: #FFB74D;
-            }
-
-            /* 黃色系 */
-            .tertiary {
-                background: #8D6E63;
-            }
-
-            /* 褐色系 */
-
-            /* 嚐味列表 */
-            .detail-list {
-                list-style: none;
-                padding: 0 !important;
-            }
-
-            .detail-list li {
-                padding: 8px 0;
-                border-bottom: 1px dashed #eee;
-            }
-
-            .detail-list li:last-child {
-                border-bottom: none;
-            }
-
-            .detail-list b {
-                color: var(--primary-color);
-                margin-right: 5px;
-            }
-        </style>
-
-        <h2 style="margin-bottom: 20px;">品酒體驗卡</h2>
-
-        <script>
-            function toggleGuide(element) {
-                // 1. 切換 active class
-                element.classList.toggle('active');
-
-                // 2. 處理高度動畫
-                var content = element.querySelector('.guide-content');
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                }
-
-
-                document.querySelectorAll('.guide-item').forEach(item => {
-                    if (item !== element) {
-                        item.classList.remove('active');
-                        item.querySelector('.guide-content').style.maxHeight = null;
-                    }
-                });
-
-            }
-        </script>
         <div class="flip-grid">
-
             <div class="flip-card" onclick="this.classList.toggle('flipped')">
                 <div class="flip-inner">
                     <div class="flip-front">
                         <h1>1</h1>
-                        <small style="opacity:0.8; margin-top:10px;">點擊翻開答案</small>
+                        <p>羅亞爾河白酒</p>
+                        <p>👉 翻開答案</p>
                     </div>
                     <div class="flip-back">
-                        <img src="donatien.png" class="wine-card-img"
+                        <img src="wine_card_1.png" alt="解答卡 1" class="full-bleed-img"
                             onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081840.png'">
-
-                        <div class="wine-title">Le Master Melon</div>
-                        <div class="wine-sub">Loire / Melon de Bourgogne</div>
-
-                        <div class="wine-flavors">
-                            <div class="flavor-row">🍑 杏桃、🍋 檸檬皮</div>
-                            <div class="flavor-row">🌸 花香、🍈 香瓜</div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1202,19 +1398,12 @@
                 <div class="flip-inner">
                     <div class="flip-front">
                         <h1>2</h1>
-                        <small style="opacity:0.8; margin-top:10px;">點擊翻開答案</small>
+                        <p>波爾多白酒</p>
+                        <p>👉 翻開答案</p>
                     </div>
                     <div class="flip-back">
-                        <img src="lafont.jpg" class="wine-card-img"
+                        <img src="wine_card_2.png" alt="解答卡 2" class="full-bleed-img"
                             onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081840.png'">
-
-                        <div class="wine-title">Ch. Lafont Menaut</div>
-                        <div class="wine-sub">Bordeaux / Sauv. Blanc</div>
-
-                        <div class="wine-flavors">
-                            <div class="flavor-row">🍊 葡萄柚、🍊 柑橘</div>
-                            <div class="flavor-row">🍑 桃子、🍈 蜜瓜</div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1223,19 +1412,12 @@
                 <div class="flip-inner">
                     <div class="flip-front">
                         <h1>3</h1>
-                        <small style="opacity:0.8; margin-top:10px;">點擊翻開答案</small>
+                        <p>羅亞爾河紅酒</p>
+                        <p>👉 翻開答案</p>
                     </div>
                     <div class="flip-back">
-                        <img src="donatien_n7.png" class="wine-card-img"
+                        <img src="wine_card_3.png" alt="解答卡 3" class="full-bleed-img"
                             onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081840.png'">
-
-                        <div class="wine-title">Sancerre Rouge</div>
-                        <div class="wine-sub">Loire / Pinot Noir</div>
-
-                        <div class="wine-flavors">
-                            <div class="flavor-row">🍒 櫻桃、🍇 覆盆莓</div>
-                            <div class="flavor-row">🍓 草莓果醬</div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1244,92 +1426,275 @@
                 <div class="flip-inner">
                     <div class="flip-front">
                         <h1>4</h1>
-                        <small style="opacity:0.8; margin-top:10px;">點擊翻開答案</small>
+                        <p>波爾多紅酒</p>
+                        <p>👉 翻開答案</p>
                     </div>
                     <div class="flip-back">
-                        <img src="siurac.png" class="wine-card-img"
+                        <img src="wine_card_4.png" alt="解答卡 4" class="full-bleed-img"
                             onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081840.png'">
-
-                        <div class="wine-title">Ch. Siurac</div>
-                        <div class="wine-sub">Bordeaux Right Bank</div>
-
-                        <div class="wine-flavors">
-                            <div class="flavor-row">🫐 黑李、🍒 黑櫻桃</div>
-                            <div class="flavor-row">✏️ 石墨、☕ 咖啡</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <!-- from here 
-        <div class="flip-grid">
-            <div class="flip-card" onclick="this.classList.toggle('flipped')">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <h1>1</h1>
-                        <small style="color:rgba(255,255,255,0.7)">點擊翻轉</small>
-                    </div>
-                    <div class="flip-back">
-                        <h4 style="color:var(--primary-color)">Sancerre Rouge</h4>
-                        <small style="color:#999; margin-bottom:10px;">Loire / Pinot Noir</small>
-                        <span class="flavor-tag">🍒 櫻桃、🍓 草莓</span>
-                        <span class="flavor-tag">🍬 甘草、🌶️ 胡椒</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flip-card" onclick="this.classList.toggle('flipped')">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <h1>2</h1>
-                        <small style="color:rgba(255,255,255,0.7)">點擊翻轉</small>
-                    </div>
-                    <div class="flip-back">
-                        <h4 style="color:var(--primary-color)">Ch. Siaurac</h4>
-                        <small style="color:#999; margin-bottom:10px;">Right Bank</small>
-                        <span class="flavor-tag">🍄 松露、✏️ 石墨</span>
-                        <span class="flavor-tag">☕ 咖啡、🌿 青草</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flip-card" onclick="this.classList.toggle('flipped')">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <h1>3</h1>
-                        <small style="color:rgba(255,255,255,0.7)">點擊翻轉</small>
-                    </div>
-                    <div class="flip-back">
-                        <h4 style="color:var(--primary-color)">Le Master Melon</h4>
-                        <small style="color:#999; margin-bottom:10px;">Loire / Melon</small>
-                        <span class="flavor-tag">🍑 杏李、🍋 檸檬</span>
-                        <span class="flavor-tag">🌸 花香、🍈 香瓜</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flip-card" onclick="this.classList.toggle('flipped')">
-                <div class="flip-inner">
-                    <div class="flip-front">
-                        <h1>4</h1>
-                        <small style="color:rgba(255,255,255,0.7)">點擊翻轉</small>
-                    </div>
-                    <div class="flip-back">
-                        <h4 style="color:var(--primary-color)">Rimapere S.B.</h4>
-                        <small style="color:#999; margin-bottom:10px;">NZ / Sauv. Blanc</small>
-                        <span class="flavor-tag">🍏 芭樂、💛 百香果</span>
-                        <span class="flavor-tag">🌿 草本、🪨 礦物</span>
                     </div>
                 </div>
             </div>
         </div>
-        -->
+    </div>
     </div>
 
-    <!-- 倒數計時器 -->
-    <div id="countdown-timer">
-        <i class="fas fa-stopwatch"></i> <span id="time-display">05:00</span>
+    <div id="team" class="container page-section">
+        <div style="text-align:center; margin-bottom:40px;">
+            <h1 class="main-title" style="font-size: 2rem;">團隊介紹</h1>
+            <p style="color:#666;">16 天的法國葡萄酒產業深度探索</p>
+        </div>
+
+        <div class="team-photo-section">
+
+        </div>
+
+        <div class="journey-section">
+            <h2 class="section-title">我們的旅程</h2>
+            <div class="journey-map">
+                <div class="route">
+                    <div class="city">
+                        <div class="city-name">台灣</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="city">
+                        <div class="city-name">巴黎</div>
+                        <div class="city-days">2天</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="city">
+                        <div class="city-name">波爾多</div>
+                        <div class="city-days">10天</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="city">
+                        <div class="city-name">巴黎</div>
+                        <div class="city-days">2天</div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div class="city">
+                        <div class="city-name">台灣</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="expandable-section full-itinerary" onclick="toggleSection('fullItinerary')">
+                <div class="section-header">
+                    <div class="section-header-title"><span>📋</span><span>完整行程一覽</span></div>
+                    <div class="expand-icon" id="fullItineraryIcon">▼</div>
+                </div>
+                <div class="expandable-content" id="fullItineraryContent">
+                    <div class="content-inner">
+                        <div style="margin-bottom: 20px;">
+                            <img src="01 葡萄酒地圖.jpg" alt="法國葡萄酒地圖"
+                                style="width: 100%; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"
+                                onerror="this.src='https://cdn-icons-png.flaticon.com/512/854/854878.png'">
+                        </div>
+                        <div class="itinerary-list">
+                            <div class="itinerary-region">
+                                <div class="region-header"><span class="region-icon">🗼｜</span><span
+                                        class="region-name">巴黎</span><span class="region-days">D2-D4, D13-D15</span>
+                                </div>
+                                <ul class="location-list">
+                                    <li class="location-item">密集培訓課程</li>
+                                    <li class="location-item">蒙馬特葡萄園</li>
+                                    <li class="location-item">蒙馬特博物館</li>
+                                    <li class="location-item">酒商見習</li>
+                                    <li class="location-item">法國大使館交流</li>
+                                </ul>
+                            </div>
+                            <div class="itinerary-region">
+                                <div class="region-header"><span class="region-icon">🍇｜</span><span
+                                        class="region-name">左岸·梅多克</span><span class="region-days">D6, D10</span></div>
+                                <ul class="location-list">
+                                    <li class="location-item">Château La Louvière</li>
+                                    <li class="location-item">Château de Cérons</li>
+                                    <li class="location-item">Château Desmirail (三級莊)</li>
+                                    <li class="location-item">Château Haut-Bages Libéral (五級莊)</li>
+                                </ul>
+                            </div>
+                            <div class="itinerary-region">
+                                <div class="region-header"><span class="region-icon">🏰｜</span><span
+                                        class="region-name">右岸·聖愛美濃</span><span class="region-days">D7-D8</span></div>
+                                <ul class="location-list">
+                                    <li class="location-item">Château de Lescours</li>
+                                    <li class="location-item">Château Chauvin (列級莊)</li>
+                                    <li class="location-item">Jurade 採收慶典</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-section" style="margin-top: 40px;"></div>
+        <h2 class="section-title">波爾多深度見習 Highlights</h2>
+        <p> 👇 點擊卡片查看精選體驗</p>
+        <p></p>
+        <div class="highlight-cards">
+            <div class="highlight-card" onclick="openHighlight('winery')">
+                <div class="highlight-number">🍇 10+</div>
+                <div class="highlight-text">酒莊見習</div>
+            </div>
+            <div class="highlight-card" onclick="openHighlight('workshop')">
+                <div class="highlight-number">🍷 6-8</div>
+                <div class="highlight-text">體驗工作坊</div>
+            </div>
+            <div class="highlight-card" onclick="openHighlight('culture')">
+                <div class="highlight-number">🎪 2</div>
+                <div class="highlight-text">慶典體驗</div>
+            </div>
+            <div class="highlight-card" onclick="openHighlight('industry')">
+                <div class="highlight-number">🤝 3</div>
+                <div class="highlight-text">產業交流</div>
+            </div>
+        </div>
+
+
+        <div class="team-section" style="margin-top: 40px;">
+            <h2 class="section-title">團隊介紹</h2>
+            <div class="team-tabs">
+                <button class="team-tab active" onclick="switchTeamTab('dreamers')">釀夢者們</button>
+                <button class="team-tab" onclick="switchTeamTab('navigators')">領航員</button>
+            </div>
+            <div id="dreamersContent" class="team-content active">
+                <div class="team-intro">
+                    來自不同產業背景的 10 位青年，共同探索葡萄酒的無限可能
+                    <br />
+                    <br />
+                </div>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <img src="Profile_Annie.jpg" alt="成員1"
+                                onerror="this.src='https://cdn-icons-png.flaticon.com/512/847/847969.png'">
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <img src="Profile_Agnes.jpg" alt="成員2"
+                                onerror="this.src='https://cdn-icons-png.flaticon.com/512/847/847969.png'">
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <img src="Profile_Han.jpg" alt="成員3"
+                                onerror="this.src='https://cdn-icons-png.flaticon.com/512/847/847969.png'">
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <img src="Profile_HsinWen.jpg" alt="成員4"
+                                onerror="this.src='https://cdn-icons-png.flaticon.com/512/847/847969.png'">
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <img src="Profile_Judy.jpg" alt="成員5"
+                                onerror="this.src='https://cdn-icons-png.flaticon.com/512/847/847969.png'">
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <img src="Profile_Kai.jpg" alt="成員6"
+                                onerror="this.src='https://cdn-icons-png.flaticon.com/512/847/847969.png'">
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <img src="Profile_Kailin.jpg" alt="成員7"
+                                onerror="this.src='https://cdn-icons-png.flaticon.com/512/847/847969.png'">
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <img src="Profile_Lexie.jpg" alt="成員8"
+                                onerror="this.src='https://cdn-icons-png.flaticon.com/512/847/847969.png'">
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <img src="Profile_Miffy.jpg" alt="成員9"
+                                onerror="this.src='https://cdn-icons-png.flaticon.com/512/847/847969.png'">
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <img src="Profile_Ricky.jpg" alt="成員10"
+                                onerror="this.src='https://cdn-icons-png.flaticon.com/512/847/847969.png'">
+                        </div>
+                    </div>
+                </div>
+                <div class="team-list">
+                    <div class="team-members-grid">
+                        <div class="member-card">
+                            <div class="member-name">Annie</div>
+                            <div class="member-role">私人管家</div>
+                        </div>
+                        <div class="member-card">
+                            <div class="member-name">Agnes</div>
+                            <div class="member-role">Data Analyst</div>
+                        </div>
+                        <div class="member-card">
+                            <div class="member-name">志瀚</div>
+                            <div class="member-role">青農</div>
+                        </div>
+                        <div class="member-card">
+                            <div class="member-name">Hsin Wen</div>
+                            <div class="member-role">NKUHT Student</div>
+                        </div>
+                        <div class="member-card">
+                            <div class="member-name">Judy</div>
+                            <div class="member-role">餐飲業</div>
+                        </div>
+                        <div class="member-card">
+                            <div class="member-name">Kai</div>
+                            <div class="member-role">貓下去酒吧外場</div>
+                        </div>
+                        <div class="member-card">
+                            <div class="member-name">Kailin</div>
+                            <div class="member-role">OTA PM</div>
+                        </div>
+                        <div class="member-card">
+                            <div class="member-name">Lexie</div>
+                            <div class="member-role">雜誌編輯</div>
+                        </div>
+                        <div class="member-card">
+                            <div class="member-name">Miffy</div>
+                            <div class="member-role">Business Analyst</div>
+                        </div>
+                        <div class="member-card">
+                            <div class="member-name">Ricky</div>
+                            <div class="member-role">蘭輝酒莊</div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div id="navigatorsContent" class="team-content">
+                <div class="navigators-grid"
+                    style="display:flex; flex-direction:column; gap:15px; max-width:300px; margin:0 auto;">
+                    <div class="navigator-card">
+                        <div class="navigator-photo">
+                            <img src="navigator1.jpg" alt="計畫主持人"
+                                onerror="this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png'">
+                        </div>
+                        <div class="navigator-name">Yuhsien</div>
+                        <div class="navigator-title">計畫主持人</div>
+                    </div>
+
+                    <div class="navigator-card">
+                        <div class="navigator-photo">
+                            <img src="navigator2.jpg" alt="領隊老師"
+                                onerror="this.src='https://cdn-icons-png.flaticon.com/512/3135/3135768.png'">
+                        </div>
+                        <div class="navigator-name">Linda</div>
+                        <div class="navigator-title">領隊老師</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="nav-dock">
@@ -1338,110 +1703,143 @@
         <button class="nav-btn" onclick="goToPage('knowledge')" id="nav-knowledge"><i class="fas fa-book"></i></button>
         <button class="nav-btn" onclick="goToPage('tasting')" id="nav-tasting"><i
                 class="fas fa-wine-glass"></i></button>
+        <button class="nav-btn" onclick="goToPage('team')" id="nav-team"><i class="fas fa-users"></i></button>
     </div>
 
+    <div id="intro-modal" class="modal-wrap">
+        <div class="modal-box" style="max-width: 400px; text-align: left;">
+            <div id="intro-step-1">
+                <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 20px;">
+                    <i class="fas fa-search" style="font-size: 1.5rem;"></i> 尋找香氣天才
+                </h3>
+                <p style="font-size: 1rem; line-height: 1.8; color: #444;">
+                    想知道葡萄酒裡的「香氣」到底是什麼樣嗎？<br>我們準備了五種常在葡萄酒裡出現的經典氣味：<b
+                        style="color: var(--primary-color);">太妃糖、香草、覆盆子、黑醋栗、玫瑰！</b><br>快來試試看你的鼻子是不是天生嗅覺小天才✨</p>
+
+                <div style="text-align: center; margin: 15px 0;">
+                    <img src="aroma_intro.png" alt="香氣示意圖" style="width: 90%; max-width: 300px; height: auto;"
+                        onerror="this.src='https://cdn-icons-png.flaticon.com/512/2921/2921822.png'">
+                </div>
+
+                <button class="btn" style="margin-top: 25px;" onclick="nextIntroStep()">繼續 <i
+                        class="fas fa-arrow-right"></i></button>
+            </div>
+            <div id="intro-step-2" style="display: none;">
+                <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 20px;"><i
+                        class="fas fa-clipboard-list" style="font-size: 1.5rem;"></i> 挑戰規則</h3>
+                <div style="background: #F9F9F9; padding: 15px; border-radius: 15px; font-size: 0.95rem; color: #333;">
+                    <div style="margin-bottom: 10px; font-weight: bold; color: var(--primary-color);">🟣 遊戲時間：每組 5分鐘！
+                    </div>
+                    <ul style="margin: 0; padding-left: 20px; color: #555; line-height: 1.6;">
+                        <li>領取一組 5 入聞香瓶。</li>
+                        <li>每個瓶子皆有專屬編號，請依照你的判斷填寫。</li>
+                        <li>可重複聞、多次確認。</li>
+                    </ul>
+                    <div style="margin-top: 15px; font-size: 0.9rem; border-top: 1px dashed #ccc; padding-top: 10px;">🎁
+                        <span style="color: #d32f2f;">完成後請停留在答對題數頁面</span>，讓工作夥伴確認完畢後就有可能獲得小驚喜喔！
+                    </div>
+                </div>
+                <button class="btn" style="margin-top: 25px;" onclick="closeIntroModal()">開始挑戰！ <i
+                        class="fas fa-flag-checkered"></i></button>
+            </div>
+        </div>
+    </div>
 
     <div id="result-modal" class="modal-wrap">
-
         <div class="modal-box">
-            <div id="modal-icon-box" class="modal-icon-wrapper">
-                <i id="modal-icon" class="fas"></i>
-            </div>
-
+            <div id="modal-icon-box" class="modal-icon-wrapper"><i id="modal-icon" class="fas"></i></div>
             <h3 id="modal-title">挑戰完成</h3>
             <p id="score-display" style="color:var(--text-sub); font-size:1.2rem; margin: 5px 0;"></p>
-
             <div id="ans-display"
                 style="text-align: left; background: #f9f9f9; padding: 15px; border-radius: 15px; font-size: 0.9rem; margin-top: 15px; color: #555; max-height: 200px; overflow-y: auto;">
             </div>
-
             <p style="color: var(--primary-color); margin-top: 15px; font-size: 0.8rem; font-weight: bold;">⚠️
-                先不要跳出，請向工作人員出示此畫面</p>
+                請向工作人員出示此畫面</p>
             <button class="btn" style="margin-top: 15px; padding: 12px;"
                 onclick="document.getElementById('result-modal').style.display='none'">關閉</button>
         </div>
     </div>
 
-
-
     <script>
         // --- 頁面邏輯 ---
         function goToPage(id) {
-            // 1. 切換頁面顯示 (維持原本邏輯)
             document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
             document.getElementById(id).classList.add('active');
 
-            // 2. 切換導航按鈕狀態 (維持原本邏輯)
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             const navBtn = document.getElementById('nav-' + id);
             if (navBtn) navBtn.classList.add('active');
 
             window.scrollTo(0, 0);
 
-            // --- 🟢 修正重點：控制計時器的顯示與隱藏 ---
+            // 計時器顯示控制
             const timerUI = document.getElementById('countdown-timer');
-
             if (id === 'aroma') {
-                // 如果是進入「聞香挑戰」
-                // 1. 顯示介紹彈窗
                 showIntroModal();
-                // 2. 先把計時器藏起來 (因為還在看介紹，等按下「開始挑戰」才會由 closeIntroModal 打開它)
                 if (timerUI) timerUI.style.display = 'none';
             } else {
-                // 如果是去「其他頁面」 (首頁、知識、品酒)
-                // 強制隱藏計時器
                 if (timerUI) timerUI.style.display = 'none';
             }
         }
 
-        // --- 🟢 新增：介紹彈窗控制邏輯 ---
-        function showIntroModal() {
-            // 重置彈窗狀態：顯示第一步，隱藏第二步
-            document.getElementById('intro-step-1').style.display = 'block';
-            document.getElementById('intro-step-2').style.display = 'none';
-            // 顯示彈窗容器
-            document.getElementById('intro-modal').style.display = 'flex';
+        // --- 團隊介紹頁面邏輯 ---
+        let currentOpenSection = null;
+        let currentOpenDetail = null;
+
+        function toggleSection(sectionName) {
+            const content = document.getElementById(sectionName + 'Content');
+            const icon = document.getElementById(sectionName + 'Icon');
+            if (currentOpenSection === sectionName) {
+                content.classList.remove('expanded'); icon.classList.remove('rotated');
+                currentOpenSection = null; return;
+            }
+            if (currentOpenSection) {
+                document.getElementById(currentOpenSection + 'Content').classList.remove('expanded');
+                document.getElementById(currentOpenSection + 'Icon').classList.remove('rotated');
+            }
+            content.classList.add('expanded'); icon.classList.add('rotated');
+            currentOpenSection = sectionName;
+            setTimeout(() => { content.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
         }
 
-        function nextIntroStep() {
-            // 切換到第二步
-            document.getElementById('intro-step-1').style.display = 'none';
-            document.getElementById('intro-step-2').style.display = 'block'; // 或 'block' 配合淡入動畫
+        function toggleDetail(type) {
+            const detailId = type + 'Detail';
+            const detail = document.getElementById(detailId);
+            if (currentOpenDetail === detailId) {
+                detail.classList.remove('expanded'); currentOpenDetail = null; return;
+            }
+            if (currentOpenDetail) { document.getElementById(currentOpenDetail).classList.remove('expanded'); }
+            detail.classList.add('expanded'); currentOpenDetail = detailId;
+            setTimeout(() => { detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
         }
 
-        function closeIntroModal() {
-            document.getElementById('intro-modal').style.display = 'none';
-            // 🟢 開始計時！
-            timeRemaining = 300; // 每次重新挑戰都重置為 5 分鐘
-            startTimer();
+        function switchTeamTab(tabName) {
+            document.querySelectorAll('.team-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.team-content').forEach(content => content.classList.remove('active'));
+            event.target.classList.add('active');
+            if (tabName === 'dreamers') document.getElementById('dreamersContent').classList.add('active');
+            else if (tabName === 'navigators') document.getElementById('navigatorsContent').classList.add('active');
         }
 
-        // --- 聞香題庫邏輯 ---
-        // --- 聞香題庫邏輯 ---
+        // --- 聞香題庫與計時器邏輯 ---
         const aromas = ['太妃糖', '香草', '黑醋栗', '覆盆子', '玫瑰'];
         const correct = { 1: '太妃糖', 2: '香草', 3: '黑醋栗', 4: '覆盆子', 5: '玫瑰' };
+        let timerInterval;
+        let timeRemaining = 300;
 
         const quizList = document.getElementById('quiz-list');
-        // 清空原本的內容 (防止重複生成)
         quizList.innerHTML = '';
-
         for (let i = 1; i <= 5; i++) {
             let html = `
                 <div class="bottle-row">
-                    <div class="bottle-header">
-                        <span class="bottle-num">${i}</span>
-                        <span style="font-size:0.9rem; color:#888;">號瓶香氣</span>
-                    </div>
+                    <div class="bottle-header"><span class="bottle-num">${i}</span><span class="bottle-label">號瓶香氣</span></div>
                     <div class="chips-container" id="q-${i}">
             `;
-            aromas.forEach(a => {
-                html += `<div class="chip" onclick="selectChip(${i}, this, '${a}')">${a}</div>`;
-            });
+            aromas.forEach(a => { html += `<div class="chip" onclick="selectChip(${i}, this, '${a}')">${a}</div>`; });
             html += `</div><input type="hidden" id="ans-${i}"></div>`;
             quizList.innerHTML += html;
         }
 
-        // 選擇選項的函式保持不變
         function selectChip(qId, el, val) {
             const parent = document.getElementById('q-' + qId);
             parent.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
@@ -1449,176 +1847,258 @@
             document.getElementById('ans-' + qId).value = val;
         }
 
-        // 修改後的檢查函式
-        // 修改後的檢查函式 (支援強制提交)
+        function showIntroModal() {
+            document.getElementById('intro-step-1').style.display = 'block';
+            document.getElementById('intro-step-2').style.display = 'none';
+            document.getElementById('intro-modal').style.display = 'flex';
+        }
+        function nextIntroStep() { document.getElementById('intro-step-1').style.display = 'none'; document.getElementById('intro-step-2').style.display = 'block'; }
+        function closeIntroModal() {
+            document.getElementById('intro-modal').style.display = 'none';
+            timeRemaining = 300; startTimer();
+        }
+
+        function startTimer() {
+            const display = document.getElementById('time-display');
+            const timerUI = document.getElementById('countdown-timer');
+            timerUI.style.display = 'block'; timerUI.classList.remove('urgent');
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                display.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                if (timeRemaining <= 30) timerUI.classList.add('urgent');
+                if (timeRemaining <= 0) { clearInterval(timerInterval); checkAroma(true); }
+            }, 1000);
+        }
+
         function checkAroma(isTimeUp = false) {
-            let score = 0;
-            let detail = '';
-            let allDone = true;
-
-            // 停止計時器 (避免重複觸發)
-            clearInterval(timerInterval);
-            document.getElementById('countdown-timer').style.display = 'none';
-
+            let score = 0; let detail = ''; let allDone = true;
+            clearInterval(timerInterval); document.getElementById('countdown-timer').style.display = 'none';
             for (let i = 1; i <= 5; i++) {
                 const userAns = document.getElementById('ans-' + i).value;
-
-                // 如果是用戶手動按提交，且有空白，則標記未完成
-                if (!userAns && !isTimeUp) {
-                    allDone = false;
-                }
-
-                // 檢查是否正確
+                if (!userAns && !isTimeUp) allDone = false;
                 const isCorrect = userAns === correct[i];
                 if (isCorrect) score++;
-
                 const icon = isCorrect ? '✅' : '❌';
-
-                // 顯示邏輯：如果是空白，顯示 (未作答)
                 const userShow = userAns ? userAns : '未作答';
-
-                detail += `<div style="margin-bottom:4px; padding-bottom:4px; border-bottom:1px solid #eee;">
-                    <b>${i}號:</b> ${correct[i]} ${isCorrect ? '' : '(你選:' + userShow + ')'} ${icon}
-                </div>`;
+                detail += `<div style="margin-bottom:4px; padding-bottom:4px; border-bottom:1px solid #eee;"><b>${i}號:</b> ${correct[i]} ${isCorrect ? '' : '(你選:' + userShow + ')'} ${icon}</div>`;
             }
+            if (!allDone && !isTimeUp) { alert('請完成所有題目的選擇喔！'); document.getElementById('countdown-timer').style.display = 'block'; startTimer(); return; }
 
-            // 如果是用戶手動按，且沒做完，就擋住
-            if (!allDone && !isTimeUp) {
-                alert('請完成所有題目的選擇喔！');
-                // 恢復計時器顯示 (因為還沒真的結束)
-                document.getElementById('countdown-timer').style.display = 'block';
-                startTimer(); // 繼續計時 (可選)
-                return;
-            }
-
-            // --- 以下顯示結果彈窗 (邏輯不變) ---
             const modal = document.getElementById('result-modal');
             const iconBox = document.getElementById('modal-icon-box');
             const iconEl = document.getElementById('modal-icon');
             const titleEl = document.getElementById('modal-title');
-
             if (score === 5) {
-                iconBox.className = "modal-icon-wrapper";
-                iconEl.className = "fas fa-crown";
-                iconEl.style.color = "#FFD700";
-                titleEl.innerText = "完美全對！";
-                titleEl.style.color = "#FFD700";
+                iconBox.className = "modal-icon-wrapper"; iconEl.className = "fas fa-crown"; iconEl.style.color = "#FFD700"; titleEl.innerText = "完美全對！"; titleEl.style.color = "#FFD700";
             } else {
-                iconBox.className = "modal-icon-wrapper shake";
-                iconEl.className = "fas fa-sad-tear";
-                iconEl.style.color = "#B0BEC5";
-
-                // 如果是時間到，標題改一下
-                if (isTimeUp) {
-                    titleEl.innerText = "時間到！挑戰結束";
-                } else {
-                    titleEl.innerText = "挑戰結束";
-                }
-                titleEl.style.color = "#333";
+                iconBox.className = "modal-icon-wrapper shake"; iconEl.className = "fas fa-sad-tear"; iconEl.style.color = "#B0BEC5";
+                titleEl.innerText = isTimeUp ? "時間到！挑戰結束" : "挑戰結束"; titleEl.style.color = "#333";
             }
-
             document.getElementById('score-display').innerText = `答對 ${score} / 5 題`;
             document.getElementById('ans-display').innerHTML = detail;
             modal.style.display = 'flex';
         }
 
-        // --- 計時器邏輯 ---
-        let timerInterval;
-        let timeRemaining = 300; // 5分鐘 = 300秒
-
-        function startTimer() {
-            // 重置時間
-            // 如果您希望每次進來都重置，把下面這行取消註解
-            // timeRemaining = 300; 
-
-            const display = document.getElementById('time-display');
-            const timerUI = document.getElementById('countdown-timer');
-
-            timerUI.style.display = 'block'; // 顯示計時器
-            timerUI.classList.remove('urgent');
-
-            // 清除舊的計時器防止重疊
-            if (timerInterval) clearInterval(timerInterval);
-
-            timerInterval = setInterval(() => {
-                timeRemaining--;
-
-                // 計算分秒
-                const minutes = Math.floor(timeRemaining / 60);
-                const seconds = timeRemaining % 60;
-
-                // 補零格式化 (例如 05:09)
-                display.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-                // 剩最後 30 秒變色
-                if (timeRemaining <= 30) {
-                    timerUI.classList.add('urgent');
+        // --- 品酒手風琴邏輯 ---
+        function toggleGuide(element) {
+            const allItems = document.querySelectorAll('.guide-item');
+            allItems.forEach(item => {
+                if (item !== element && item.classList.contains('active')) {
+                    item.classList.remove('active'); item.querySelector('.guide-content').style.maxHeight = null;
                 }
+            });
+            element.classList.toggle('active');
+            var content = element.querySelector('.guide-content');
+            if (content.style.maxHeight) content.style.maxHeight = null; else content.style.maxHeight = content.scrollHeight + "px";
+        }
 
-                // 時間到
-                if (timeRemaining <= 0) {
-                    clearInterval(timerInterval);
-                    checkAroma(true); // 傳入 true，代表是「時間到強制提交」
-                }
-            }, 1000);
+        // --- 詳細行程彈窗控制 ---
+        function openHighlight(id) {
+            document.getElementById('modal-' + id).style.display = 'flex';
+        }
+
+        function closeHighlight(id) {
+            document.getElementById('modal-' + id).style.display = 'none';
         }
 
     </script>
 
-    <!-- 聞香挑戰彈窗 -->
-    <div id="intro-modal" class="modal-wrap" style="display: none; z-index: 3000;">
-        <div class="modal-box" style="max-width: 400px; text-align: left;">
-
-            <div id="intro-step-1">
-                <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 20px;">
-                    <i class="fas fa-search" style="font-size: 1.5rem;"></i> 尋找香氣天才
-                </h3>
-                <p style="font-size: 1rem; line-height: 1.8; color: #444;">
-                    想知道葡萄酒裡的「香氣」到底是什麼樣嗎？<br><br>
-                    我們準備了五種常在葡萄酒裡出現的經典氣味：<br>
-                    <b style="color: var(--primary-color);">太妃糖、香草、覆盆子、黑醋栗、玫瑰！</b><br><br>
-                    快來試試看你的鼻子是不是天生嗅覺小天才！✨
-                </p>
-                <button class="btn" style="margin-top: 25px;" onclick="nextIntroStep()">
-                    繼續 <i class="fas fa-arrow-right"></i>
-                </button>
+    <div id="modal-winery" class="modal-wrap full-screen-modal">
+        <div class="modal-box scrollable-box">
+            <div class="modal-header">
+                <h3>🍇 10+ 酒莊見習</h3>
+                <button class="close-btn" onclick="closeHighlight('winery')"><i class="fas fa-times"></i></button>
             </div>
+            <div class="modal-content-body">
+                <div class="detail-block">
+                    <h4>Château La Louvière（左岸）</h4>
+                    <div class="img-row">
+                        <img src="winery_louviere_1.jpg" class="detail-img" alt="圖片1">
+                        <img src="winery_louviere_2.jpg" class="detail-img" alt="圖片2">
+                    </div>
+                    <p>這座酒莊的 Wine Tourism
+                        設計相當完善。導覽員具備豐富的葡萄酒知識，透過「葡萄藤壁畫」互動遊戲，讓參訪者了解酒莊四季的作業節奏，包括除蟲、封瓶等各項工作時程。適逢採收期，我們近距離觀察了採收後的揀選、清洗、除枝等流程。導覽員也使用「酒鼻子」工具帶領大家進行聞香辨認，整體體驗兼具知識性與互動性，即使是葡萄酒初學者也能充分參與。
+                    </p>
 
-            <div id="intro-step-2" style="display: none;">
-                <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 20px;">
-                    <i class="fas fa-clipboard-list" style="font-size: 1.5rem;"></i> 挑戰規則
-                </h3>
-
-                <div style="background: #F9F9F9; padding: 15px; border-radius: 15px; font-size: 0.95rem; color: #333;">
-                    <div style="margin-bottom: 10px; font-weight: bold; color: var(--primary-color);">
-                        🔶 遊戲時間：每組 5分鐘！
-                    </div>
-                    <div style="font-weight: bold; color: var(--primary-color); margin-bottom: 5px;">
-                        🔶 進行方式
-                    </div>
-                    <ul style="margin: 0; padding-left: 20px; color: #555; line-height: 1.6;">
-                        <li>領取一組 5 入聞香瓶。</li>
-                        <li>每個瓶子皆有專屬編號，請依照你的判斷填寫對應的香氣名稱。</li>
-                        <li>可重複聞、多次確認，也可與同組成員討論。</li>
-                    </ul>
-                    <div style="margin-top: 15px; font-size: 0.9rem; border-top: 1px dashed #ccc; padding-top: 10px;">
-                        🎁 <span style="color: #d32f2f;">完成後請停留在答對題數頁面</span>，讓工作夥伴確認完畢後就有可能獲得小驚喜喔！
-                    </div>
                 </div>
+                <hr>
+                <div class="detail-block">
+                    <h4>Château de Lescours（右岸聖愛美濃）</h4>
+                    <div class="img-row">
+                        <img src="winery_lescours_1.jpg" class="detail-img" alt="圖片1">
+                        <img src="winery_lescours_2.jpg" class="detail-img" alt="圖片2">
+                    </div>
+                    <p>
+                        導覽員是莊主本人，從他的人生經歷到小酒莊如何與周邊酒莊合作經營，分享了許多實務經驗。當天參與的採收體驗雖然只是協助採收機器無法到達的最前排葡萄，但從中學習到判斷葡萄成熟度、決定該剪或該捨的標準，以及如何以科學方法判斷最佳採收時機。這些都是在課堂上難以接觸到的第一手產業知識。
+                    </p>
 
-                <button class="btn" style="margin-top: 25px;" onclick="closeIntroModal()">
-                    開始挑戰！ <i class="fas fa-flag-checkered"></i>
-                </button>
+                </div>
+                <hr>
+                <div class="detail-block">
+                    <h4>Château Desmirail（梅多克三級莊）</h4>
+                    <div class="img-row">
+                        <img src="winery_desmirail_1.jpg" class="detail-img" alt="圖片1">
+                        <img src="winery_desmirail_2.jpg" class="detail-img" alt="圖片2">
+                    </div>
+                    <p>作為三級莊，這座酒莊提供多元的參訪方案選擇，包括基本參觀、「香氣體驗+品酒」，甚至還有馬車導覽。雖然導覽的核心內容與一般酒莊相似，但從參訪方案的設計、葡萄園與酒窖的管理方式，都能看出列級酒莊在系統化運作上的規模與層次。這也展現了
+                        Wine Tourism 可以因應不同客群需求，發展出多樣化的體驗模式。
+                    </p>
 
+                </div>
+                <hr>
+                <div class="detail-block">
+                    <h4>Frères Moines（干邑產區）</h4>
+                    <div class="img-row">
+                        <img src="winery_moines_1.jpg" class="detail-img" alt="圖片1">
+                        <img src="winery_moines_2.jpg" class="detail-img" alt="圖片2">
+                    </div>
+                    <p>這是行程中最深入的橡木桶工藝體驗。實地觀察職人手工製作橡木桶的過程，了解到每個步驟都需要精準的技術與經驗累積，同時也伴隨著一定的危險性。我們認識了勃根地桶與波爾多桶的差異，並親手參與拼裝過程。莊主與職人對於家族事業的投入，以及對工藝品質的堅持，令人印象深刻。酒莊雖然產量不大，但精緻度高，同時也為其他大型酒廠提供白蘭地釀造支援。
+                    </p>
 
-
-
+                </div>
             </div>
-
         </div>
     </div>
+
+    <div id="modal-workshop" class="modal-wrap full-screen-modal">
+        <div class="modal-box scrollable-box">
+            <div class="modal-header">
+                <h3>🛠️ 體驗工作坊</h3>
+                <button class="close-btn" onclick="closeHighlight('workshop')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-content-body">
+                <div class="detail-block">
+                    <h4>混酒工作坊（Château La Croizille）</h4>
+                    <div class="img-row">
+                        <img src="workshop_cocktail_1.jpg" class="detail-img" alt="圖片1">
+                        <img src="workshop_cocktail_2.jpg" class="detail-img" alt="圖片2">
+
+                    </div>
+                    <p>工作坊讓我們有機會親自調配葡萄酒。導覽員引導如何透過不同比例的組合，創造出理想的風味平衡。每個人都嘗試了不同的調配方式，在實作過程中更深刻理解釀酒師在混釀時的思考邏輯。
+                    </p>
+                </div>
+                <hr>
+                <div class="detail-block">
+                    <h4>貴腐酒調酒工作坊（Château La Tour Blanche）</h4>
+                    <div class="img-row">
+                        <img src="workshop_blend_1.jpg" class="detail-img" alt="圖片1">
+                        <img src="workshop_blend_2.jpg" class="detail-img" alt="圖片2">
+                    </div>
+                    <p>酒莊展示了貴腐酒的多元應用可能性，教導如何用貴腐酒調製各種創意飲品。透過品嚐不同年份的貴腐酒，能明顯感受到氣候條件對風味的影響。 </p>
+
+                </div>
+                <hr>
+                <div class="detail-block">
+                    <h4>橡木桶製作體驗（Frères Moines）</h4>
+                    <div class="img-row">
+                        <img src="workshop_barrel_1.jpg" class="detail-img" alt="圖片1">
+                        <img src="workshop_barrel_2.jpg" class="detail-img" alt="圖片2">
+                    </div>
+                    <p>手工橡木桶的製作展現了高度的工藝技術。從選材、烘烤到最後的組裝，每個環節都需要精準的技術與多年的經驗累積。這次體驗讓我們對橡木桶在葡萄酒釀造中的重要性有了更深的認識。
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-culture" class="modal-wrap full-screen-modal">
+        <div class="modal-box scrollable-box">
+            <div class="modal-header">
+                <h3>🎪 深度文化體驗</h3>
+                <button class="close-btn" onclick="closeHighlight('culture')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-content-body">
+                <div class="detail-block">
+                    <h4>聖愛美濃 Jurade 採收慶典</h4>
+                    <div class="img-row">
+                        <img src="culture_jurade_1.jpg" class="detail-img" alt="圖片1">
+                        <img src="culture_jurade_2.jpg" class="detail-img" alt="圖片2">
+                    </div>
+                    <p>音樂、燈光與中世紀建築相互輝映，穿著傳統服飾的遊行隊伍，呈現出葡萄酒文化如何深植於當地的歷史脈絡中，成為整個產區的榮譽象徵與文化傳承。</p>
+
+                </div>
+                <hr>
+                <div class="detail-block">
+                    <h4>波爾多葡萄酒博物館（La Cité du Vin）</h4>
+                    <div class="img-row">
+                        <img src="culture_museum_1.jpg" class="detail-img" alt="圖片1">
+                        <img src="culture_museum_2.jpg" class="detail-img" alt="圖片2">
+                    </div>
+                    <p>館內的五感體驗區透過互動設計，讓釀造過程、葡萄品種、地理知識等內容變得容易理解。在這裡參觀就像是一場系統性的知識整理，將分散的經驗串連成完整的架構。</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-industry" class="modal-wrap full-screen-modal">
+        <div class="modal-box scrollable-box">
+            <div class="modal-header">
+                <h3>🤝 產業交流</h3>
+                <button class="close-btn" onclick="closeHighlight('industry')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-content-body">
+                <div class="detail-block">
+                    <h4>巴黎酒商見習 (La maison des Millesimes)</h4>
+                    <div class="img-row">
+                        <img src="industry_shop_1.jpg" class="detail-img" alt="圖片1">
+                        <img src="industry_shop_2.jpg" class="detail-img" alt="圖片2">
+                    </div>
+                    <p>店主分享了從個人經歷到開設酒舖的完整歷程。從盲測的熟練度、風味推論的邏輯，到針對不同客人需求推薦適合的餐酒搭配，都能看出深厚的葡萄酒知識與實務經驗。
+                    </p>
+
+                </div>
+                <hr>
+                <div class="detail-block">
+                    <h4>波爾多會議局代表交流</h4>
+                    <div class="img-row">
+                        <img src="industry_bureau_1.jpg" class="detail-img" alt="圖片1">
+                        <img src="industry_bureau_2.jpg" class="detail-img" alt="圖片2">
+                    </div>
+                    <p>與 Corporate & Congress Project Manager Ilona
+                        的交流中，了解到會議局扮演「橋樑與媒合者」的角色，協助主辦單位進行場地建議、供應商媒合與活動策劃支援。 </p>
+
+                </div>
+                <hr>
+                <div class="detail-block">
+                    <h4>法國大使館交流</h4>
+                    <div class="img-row">
+                        <img src="industry_embassy_1.jpg" class="detail-img" alt="圖片1">
+                        <img src="industry_embassy_2.jpg" class="detail-img" alt="圖片2">
+                    </div>
+                    <p>透過官方角度了解台法文化交流、經貿合作的現況，以及法國政府如何看待葡萄酒產業在國際推廣中的角色，為這次學習之旅增添了更宏觀的視野。</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 </body>
-
-
 
 </html>
